@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+
+    <meta charset="UTF-8" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Segmentación de Redes - Definición</title>
+
+
+    <base href="./" />
+
+
+    <link rel="stylesheet" href="assets/css/base.css" />
+
+    <link rel="stylesheet" href="assets/css/theme.css" />
+
+    <link rel="stylesheet" href="assets/css/background.css" />
+
+    <link rel="stylesheet" href="assets/css/navbar.css" />
+
+    <link rel="stylesheet" href="assets/css/content.css" />
+
+    <link rel="stylesheet" href="assets/css/components.css" />
+</head>
+
+<body>
+    <div class="network-background" id="networkBg" aria-hidden="true"></div>
+
+    <div class="dashboard" id="dashboardPage">
+        <nav class="navbar">
+            <div class="navbar-content">
+                <div class="logo" aria-label="UAEMCITOS">🌐 UAEMCITOS</div>
+
+                <div class="nav-menu" role="menubar">
+                    <div class="nav-item" role="none">
+                        <a class="nav-link" href="definicion.html" role="menuitem">Definición</a>
+                    </div>
+
+                    <div class="nav-item" role="none">
+                        <button class="nav-link" data-dropdown="concepts" aria-expanded="false"
+                            aria-controls="conceptsDropdown" role="menuitem">
+                            Conceptos <span class="caret">▼</span>
+                        </button>
+                        <div class="dropdown" id="conceptsDropdown" hidden>
+                            <a class="dropdown-item" href="pages/tipos_segmentacion.html">Tipos de Segmentación</a>
+                            <a class="dropdown-item" href="pages/beneficios.html">Beneficios</a>
+                            <a class="dropdown-item" href="pages/implementacion.html">Implementación</a>
+                        </div>
+                    </div>
+
+                    <div class="nav-item" role="none">
+                        <button class="nav-link" data-dropdown="tools" aria-expanded="false"
+                            aria-controls="toolsDropdown" role="menuitem">
+                            Herramientas <span class="caret">▼</span>
+                        </button>
+                        <div class="dropdown" id="toolsDropdown" hidden>
+                            <a class="dropdown-item" href="pages/calculadora.html">Calculadora</a>
+                            <a class="dropdown-item" href="pages/monitoreo.html">Monitoreo</a>
+                            <a class="dropdown-item" href="pages/analisis.html">Análisis</a>
+                            <a class="dropdown-item" href="pages/reportes.html">Reportes</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="user-menu">
+                    <span id="welcomeUser" class="welcome">Bienvenido, Usuario</span>
+                    <button id="logoutBtn" class="logout-btn">Salir</button>
+                </div>
+            </div>
+        </nav>
+
+        <main class="main-content" id="mainContent" tabindex="-1">
+        </main>
+    </div>
+
+    <div class="modal" id="appModal" hidden aria-hidden="true" role="dialog" aria-modal="true"
+        aria-labelledby="modalTitle">
+        <div class="modal-backdrop" data-modal-close></div>
+        <div class="modal-dialog" role="document">
+            <header class="modal-header">
+                <h3 id="modalTitle">Título del modal</h3>
+                <button class="modal-close" data-modal-close aria-label="Cerrar">✕</button>
+            </header>
+            <div class="modal-body" id="modalBody">Contenido del modal...</div>
+            <footer class="modal-footer">
+                <button class="btn" data-modal-close>Cerrar</button>
+            </footer>
+        </div>
+    </div>
+
+    <script src="assets/js/background.js" defer></script>
+    <script src="assets/js/effects.js" defer></script>
+    <script src="assets/js/content.js" defer></script>
+    <script src="assets/js/nav.js" defer></script>
+    <script src="assets/js/auth.js" defer></script>
+    <script src="assets/js/modal.js" defer></script>
+    <script src="assets/js/app.js" defer></script>
+
+
+    
+</body>
+
+</html>

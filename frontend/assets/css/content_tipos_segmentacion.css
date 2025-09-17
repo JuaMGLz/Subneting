@@ -1,0 +1,128 @@
+/* Ajustes propios para Tipos de Segmentación.
+   Mantiene el look & feel de content.css/components.css y solo añade lo necesario. */
+
+.image-gallery {
+  /* ya existe en tu content.css; aquí solo garantizamos un min ancho agradable */
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+}
+
+.image-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+/* Se elimina la funcionalidad de flip-card, así que el estilo se simplifica a mostrar solo el frente. */
+.flip-card {
+  position: relative;
+  width: 100%;
+  height: 240px;
+  border-radius: 14px;
+  outline: none;
+  overflow: hidden;
+  /* Se elimina el perspective para evitar el efecto 3D */
+}
+
+.flip-face {
+  position: absolute;
+  inset: 0;
+  /* Se elimina backface-visibility */
+  display: grid;
+  place-items: center;
+  padding: 0;
+  background: linear-gradient(135deg, #1a1a3e, #2d2d5f);
+}
+
+.flip-front img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Se oculta la cara trasera ya que no se usará */
+.flip-back {
+  display: none;
+}
+
+.flip-hint {
+  position: absolute;
+  bottom: 10px;
+  left: 12px;
+  right: 12px;
+  font-size: 0.85rem;
+  opacity: 0.9;
+  text-align: center;
+  color: var(--text-muted, #b3b3b3);
+  background: rgba(0, 0, 0, 0.35);
+  padding: 6px 10px;
+  border-radius: 8px;
+}
+
+.analogy-panel h4 {
+  color: var(--primary, #00d4ff);
+  margin-bottom: 8px;
+}
+
+.analogy-panel p {
+  color: #ffffff;
+  line-height: 1.6;
+  margin-bottom: 6px;
+}
+
+.analogy-panel ul {
+  margin-left: 1rem;
+  color: #e8e8e8;
+  line-height: 1.5;
+}
+
+/* CAMBIOS SOLICITADOS: fondo  para el bloque de definición */
+.definition-block {
+  background: hsl(195, 84%, 48%); /* Fondo */
+  border: 1px solid rgba(0, 0, 0, 0.15);
+  border-radius: 12px;
+  padding: 14px 16px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+/* Colores para el texto dentro del bloque blanco */
+.definition-block h4 {
+  color: #0f0f23; /* Título oscuro */
+  margin-bottom: 6px;
+}
+
+.definition-block p,
+.list-compact li {
+  color: #333333; /* Texto principal oscuro para buena legibilidad */
+  line-height: 1.5;
+}
+
+.list-compact {
+  margin: 10px 0 0 0;
+  padding-left: 18px;
+}
+
+.list-compact li {
+  margin: 6px 0;
+}
+
+/* Responsive: incrementa altura del flip en pantallas grandes */
+@media (min-width: 992px) {
+  .flip-inner {
+    height: 280px;
+  }
+}
+/* --- Texto justificado (con viñetas) --- */
+.definition-text,
+.definition-block p,
+.list-compact li {
+  text-align: justify;
+  text-justify: inter-word;
+  hyphens: auto;
+}
+
+/* Asegurar viñetas visibles y buena sangría */
+.list-compact {
+  list-style: disc outside;
+  padding-left: 1.25rem; /* ~20px para que no se pegue el texto al marcador */
+}

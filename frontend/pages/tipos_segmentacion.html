@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Segmentación de Redes - Tipos</title>
+
+    <link rel="stylesheet" href="../assets/css/base.css">
+    <link rel="stylesheet" href="../assets/css/theme.css">
+    <link rel="stylesheet" href="../assets/css/background.css">
+    <link rel="stylesheet" href="../assets/css/navbar.css">
+    <link rel="stylesheet" href="../assets/css/content.css">
+    <link rel="stylesheet" href="../assets/css/components.css">
+
+    <link rel="stylesheet" href="../assets/css/content_tipos_segmentacion.css">
+
+    <link rel="preload" as="image" href="../assets/images/fisica.jpeg">
+    <link rel="preload" as="image" href="../assets/images/logica.jpeg">
+    <link rel="preload" as="image" href="../assets/images/microsegmentacion.jpeg">
+
+</head>
+
+<body>
+    <div class="network-background" id="networkBg" aria-hidden="true"></div>
+
+    <div class="dashboard" id="dashboardPage">
+        <nav class="navbar">
+            <div class="navbar-content">
+                <div class="logo" aria-label="UAEMCITOS">🌐 UAEMCITOS </div>
+
+                <div class="nav-menu" role="menubar">
+                    <div class="nav-item" role="none">
+                        <a class="nav-link" href="../definicion.html" role="menuitem">Definición</a>
+                    </div>
+
+                    <div class="nav-item" role="none">
+                        <button class="nav-link" data-dropdown="concepts" aria-expanded="false"
+                            aria-controls="conceptsDropdown" role="menuitem">
+                            Conceptos <span class="caret">▼</span>
+                        </button>
+                        <div class="dropdown" id="conceptsDropdown" hidden>
+                            <a class="dropdown-item" href="tipos_segmentacion.html">Tipos de Segmentación</a>
+                            <a class="dropdown-item" href="beneficios.html">Beneficios</a>
+                            <a class="dropdown-item" href="implementacion.html">Implementación</a>
+                        </div>
+                    </div>
+
+                    <div class="nav-item" role="none">
+                        <button class="nav-link" data-dropdown="tools" aria-expanded="false"
+                            aria-controls="toolsDropdown" role="menuitem">
+                            Herramientas <span class="caret">▼</span>
+                        </button>
+                        <div class="dropdown" id="toolsDropdown" hidden>
+                            <a class="dropdown-item" href="calculadora.html">Calculadora</a>
+                            <a class="dropdown-item" href="monitoreo.html">Monitoreo</a>
+                            <a class="dropdown-item" href="analisis.html">Análisis</a>
+                            <a class="dropdown-item" href="reportes.html">Reportes</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="user-menu">
+                    <span id="welcomeUser" class="welcome">Bienvenido, Usuario</span>
+                    <button id="logoutBtn" class="logout-btn">Salir</button>
+                </div>
+            </div>
+        </nav>
+
+        <main class="main-content" id="mainContent" tabindex="-1">
+            <div class="content-section">
+                <h2 class="section-title">Tipos de Segmentación</h2>
+                <p class="definition-text">
+                    La segmentación de redes se implementa principalmente de tres formas: <strong>física</strong>,
+                    <strong>lógica (VLAN)</strong> y <strong>microsegmentación</strong>.
+                    <em></em> <em></em>
+                </p>
+
+                <div class="image-gallery">
+                    <article class="image-card">
+                        <div class="flip-card" data-flip role="button" tabindex="0"
+                            aria-label="Ver analogía de Segmentación Física" aria-pressed="false">
+                            <div class="flip-inner">
+                                <div class="flip-face flip-front" aria-hidden="false">
+                                    <img src="../assets/images/fisica.jpeg"
+                                        alt="Segmentación física con hardware separado">
+                                    <div class="flip-hint">Haz clic o presiona Enter/Espacio para ver la analogía</div>
+                                </div>
+                                <div class="flip-face flip-back" aria-hidden="true">
+                                    <div class="analogy-panel">
+                                        <h4>Analogía: Oficinas con muros</h4>
+                                        <p>
+                                            Cada departamento está en una <strong>oficina distinta</strong>, con muros y
+                                            cableado propio.
+                                            Si pasa algo en una oficina, las demás <strong>no se afectan</strong>.
+                                        </p>
+                                        <ul>
+                                            <li><strong>Aislamiento total</strong> por separación física.</li>
+                                            <li><strong>Rígido y costoso</strong> de cambiar.</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <h3 class="image-title">Segmentación Física</h3>
+                        <div class="definition-block">
+                            <h4>Definición</h4>
+                            <p>
+                                Divide la red a nivel de <strong>Capa 2/3</strong> usando <strong>VLANs</strong> y
+                                controla el tráfico entre segmentos
+                                con enrutamiento/ACL/Firewall, reutilizando la misma infraestructura física.
+                            </p>
+
+                            <h4>Analogía</h4>
+                            <p>
+                                Es como una <strong>gran caja</strong> con <strong>separadores de colores</strong> y
+                                etiquetas.
+                                Todos los juguetes están en la misma caja, pero <strong>cada color es su propio
+                                    grupo</strong>.
+                            </p>
+                            <ul class="list-compact">
+                                <li>Cada separador de color es una “VLAN”.</li>
+                                <li>Si cambias la <strong>etiqueta</strong> de un juguete, lo pasas a otro grupo sin
+                                    cambiar de caja.</li>
+                                <li>Para que dos grupos se hablen, un adulto abre una <strong>puerta</strong> especial
+                                    (el “firewall/router”).</li>
+                            </ul>
+                        </div>
+                    </article>
+
+                    <article class="image-card">
+                        <div class="flip-card" data-flip role="button" tabindex="0"
+                            aria-label="Ver analogía de Segmentación Lógica (VLAN)" aria-pressed="false">
+                            <div class="flip-inner">
+                                <div class="flip-face flip-front" aria-hidden="false">
+                                    <img src="../assets/images/logica.jpeg"
+                                        alt="Segmentación lógica con VLANs e interconexión controlada">
+                                    <div class="flip-hint">Haz clic o presiona Enter/Espacio para ver la analogía</div>
+                                </div>
+                                <div class="flip-face flip-back" aria-hidden="true">
+                                    <div class="analogy-panel">
+                                        <h4>Analogía: Edificio con tarjetas de acceso</h4>
+                                        <p>
+                                            Un solo edificio y cableado, pero <strong>accesos controlados</strong> por
+                                            tarjeta.
+                                            Puedes cambiar permisos sin reconstruir nada.
+                                        </p>
+                                        <ul>
+                                            <li><strong>Flexible</strong> y eficiente en costos.</li>
+                                            <li>Requiere <strong>configuración correcta</strong> (VLAN, ACL, inter-VLAN
+                                                en firewall).</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <h3 class="image-title">Segmentación Lógica (VLAN)</h3>
+                        <div class="definition-block">
+                            <h4>Definición</h4>
+                            <p>
+                                Aplica <strong>políticas a nivel de carga de trabajo</strong> (host, VM, contenedor)
+                                mediante agentes o SDN,
+                                siguiendo <em>Zero Trust</em>: solo se permite lo necesario.
+                            </p>
+
+                            <h4>Analogía para niños</h4>
+                            <p>
+                                Imagina que <strong>cada juguete</strong> tiene su propio <strong>walkie-talkie</strong>
+                                y una lista de amigos.
+                                Solo puede hablar con quienes están en su lista.
+                            </p>
+                            <ul class="list-compact">
+                                <li>Cada juguete tiene <strong>reglas personales</strong> de con quién puede hablar.
+                                </li>
+                                <li>Si un juguete se “porta mal”, <strong>no molesta</strong> a los demás porque no
+                                    puede hablarles.</li>
+                                <li>Las conversaciones son <strong>a la medida</strong> de cada juguete.</li>
+                            </ul>
+                        </div>
+                    </article>
+
+                    <article class="image-card">
+                        <div class="flip-card" data-flip role="button" tabindex="0"
+                            aria-label="Ver analogía de Micro-segmentación" aria-pressed="false">
+                            <div class="flip-inner">
+                                <div class="flip-face flip-front" aria-hidden="false">
+                                    <img src="../assets/images/microsegmentacion.jpeg"
+                                        alt="Microsegmentación con políticas por carga de trabajo">
+                                    <div class="flip-hint">Haz clic o presiona Enter/Espacio para ver la analogía</div>
+                                </div>
+                                <div class="flip-face flip-back" aria-hidden="true">
+                                    <div class="analogy-panel">
+                                        <h4>Analogía: Guardias por persona</h4>
+                                        <p>
+                                            Cada dispositivo/servicio tiene un <strong>guardia personal</strong> que
+                                            decide con quién puede hablar y qué puede hacer.
+                                            Si uno se infecta, el resto <strong>no queda expuesto</strong>.
+                                        </p>
+                                        <ul>
+                                            <li><strong>Control granular</strong> por aplicación/host.</li>
+                                            <li>Mayor <strong>complejidad</strong> y necesidad de
+                                                visibilidad/telemetría.</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <h3 class="image-title">Micro-segmentación</h3>
+                        <div class="definition-block">
+                            <h4>Definición</h4>
+                            <p>
+                                Consiste en separar la red con <strong>hardware y cableado independientes</strong>
+                                (switches/routers dedicados, enlaces propios). Ofrece el mayor aislamiento entre
+                                dominios.
+                            </p>
+
+                            <h4>Analogía</h4>
+                            <p>
+                                Imagina que tienes <strong>tres cajas de juguetes</strong>, cada una en cuartos
+                                distintos.
+                                Los juguetes de una caja <strong>no se mezclan</strong> con los de las otras.
+                            </p>
+                            <ul class="list-compact">
+                                <li>Cada caja es como una “mini red” aparte.</li>
+                                <li>Si se derrama jugo en una caja, <strong>las otras no se manchan</strong>.</li>
+                                <li>Para usar un juguete de otra caja hay que <strong>cambiar de cuarto</strong>.</li>
+                            </ul>
+                        </div>
+                    </article>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <div class="modal" id="appModal" hidden aria-hidden="true" role="dialog" aria-modal="true"
+        aria-labelledby="modalTitle">
+        <div class="modal-backdrop" data-modal-close></div>
+        <div class="modal-dialog" role="document">
+            <header class="modal-header">
+                <h3 id="modalTitle">Título del modal</h3>
+                <button class="modal-close" data-modal-close aria-label="Cerrar">✕</button>
+            </header>
+            <div class="modal-body" id="modalBody">Contenido del modal...</div>
+            <footer class="modal-footer">
+                <button class="btn" data-modal-close>Cerrar</button>
+            </footer>
+        </div>
+    </div>
+
+    <script src="../assets/js/background.js" defer></script>
+    <script src="../assets/js/effects.js" defer></script>
+    <script src="../assets/js/nav.js" defer></script>
+    <script src="../assets/js/auth.js" defer></script>
+    <script src="../assets/js/modal.js" defer></script>
+    <script src="../assets/js/app.js" defer></script>
+
+    <script src="../assets/js/tipos_segmentacion.js" defer></script>
+
+    
+
+</body>
+
+</html>

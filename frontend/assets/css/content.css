@@ -1,0 +1,111 @@
+/* Área principal del dashboard y secciones de contenido */
+.dashboard {
+  position: relative;
+  z-index: 2;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.3);
+}
+
+.main-content {
+  padding: 30px;
+  height: calc(100vh - 80px);
+  overflow-y: auto;
+}
+
+/* Tarjetas y bloques de texto */
+.content-section {
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 15px;
+  padding: 30px;
+  margin-bottom: 30px;
+}
+
+.section-title {
+  color: var(--accent);
+  font-size: 32px;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.definition-text {
+  color: var(--text);
+  line-height: 1.8;
+  font-size: 16px;
+  margin-bottom: 30px;
+}
+
+/* Galería de imágenes/diagramas */
+.image-gallery {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 20px;
+  margin: 30px 0;
+}
+
+.image-card {
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 15px;
+  padding: 20px;
+  text-align: center;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.image-card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 20px 40px rgba(0, 212, 255, 0.2);
+}
+
+.network-diagram {
+  width: 100%;
+  height: 200px;
+  background: linear-gradient(45deg, #1a1a3e, #2d2d5f);
+  border-radius: 10px;
+  margin-bottom: 15px;
+  display: grid;
+  place-items: center;
+  font-size: 48px;
+  position: relative;
+  overflow: hidden;
+}
+
+.image-title {
+  color: var(--accent);
+  font-size: 18px;
+  font-weight: 700;
+  margin-bottom: 10px;
+}
+
+.image-description {
+  color: var(--text-dim);
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+/* Lista de beneficios */
+.benefits-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 20px;
+  margin: 30px 0;
+}
+
+.benefit-item {
+  background: rgba(0, 212, 255, 0.1);
+  border-left: 4px solid var(--accent);
+  padding: 20px;
+  border-radius: 10px;
+}
+
+.benefit-title {
+  color: var(--accent);
+  font-weight: 700;
+  margin-bottom: 10px;
+}
+
+.benefit-desc {
+  color: var(--text);
+  font-size: 14px;
+  line-height: 1.6;
+}

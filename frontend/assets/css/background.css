@@ -1,0 +1,73 @@
+/* Fondo animado de red (nodos, líneas y zonas de segmentación) */
+.network-background {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  z-index: 1;
+  pointer-events: none;
+}
+
+.network-node {
+  position: absolute;
+  width: 4px;
+  height: 4px;
+  background: var(--accent);
+  border-radius: 50%;
+  animation: pulse 2s infinite ease-in-out;
+}
+
+.network-line {
+  position: absolute;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--accent), transparent);
+  animation: dataFlow 3s infinite linear;
+}
+
+.segment-zone {
+  position: absolute;
+  border: 2px dashed var(--warning);
+  border-radius: 15px;
+  background: rgba(255, 107, 53, 0.05);
+  animation: segmentPulse 4s infinite ease-in-out;
+}
+
+/* Animaciones */
+@keyframes pulse {
+  0%,
+  100% {
+    opacity: 0.3;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.5);
+  }
+}
+
+@keyframes dataFlow {
+  0% {
+    opacity: 0;
+    transform: translateX(-100px);
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+    transform: translateX(100px);
+  }
+}
+
+@keyframes segmentPulse {
+  0%,
+  100% {
+    opacity: 0.3;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.6;
+    transform: scale(1.02);
+  }
+}

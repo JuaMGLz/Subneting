@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Segmentación de Redes - Implementación</title>
+
+    <!-- CSS global -->
+    <link rel="stylesheet" href="../assets/css/base.css" />
+    <link rel="stylesheet" href="../assets/css/theme.css" />
+    <link rel="stylesheet" href="../assets/css/background.css" />
+    <link rel="stylesheet" href="../assets/css/navbar.css" />
+    <link rel="stylesheet" href="../assets/css/content.css" />
+    <link rel="stylesheet" href="../assets/css/components.css" />
+
+    <!-- CSS específico -->
+    <link rel="stylesheet" href="../assets/css/content_implementacion.css" />
+</head>
+
+<body>
+    <div class="network-background" id="networkBg" aria-hidden="true"></div>
+
+    <div class="dashboard" id="dashboardPage">
+        <nav class="navbar">
+            <div class="navbar-content">
+                <div class="logo" aria-label="NetSegment Pro">🌐 NetSegment Pro</div>
+
+                <div class="nav-menu" role="menubar">
+                    <div class="nav-item" role="none">
+                        <a class="nav-link" href="definicion.html" role="menuitem">Definición</a>
+                    </div>
+
+                    <div class="nav-item" role="none">
+                        <button class="nav-link" data-dropdown="concepts" aria-expanded="false"
+                            aria-controls="conceptsDropdown" role="menuitem">
+                            Conceptos <span class="caret">▼</span>
+                        </button>
+                        <div class="dropdown" id="conceptsDropdown" hidden>
+                            <a class="dropdown-item" href="tipos_segmentacion.html">Tipos de Segmentación</a>
+                            <a class="dropdown-item" href="beneficios.html">Beneficios</a>
+                            <a class="dropdown-item" href="implementacion.html" aria-current="page">Implementación</a>
+                        </div>
+                    </div>
+
+                    <div class="nav-item" role="none">
+                        <button class="nav-link" data-dropdown="tools" aria-expanded="false"
+                            aria-controls="toolsDropdown" role="menuitem">
+                            Herramientas <span class="caret">▼</span>
+                        </button>
+                        <div class="dropdown" id="toolsDropdown" hidden>
+                            <a class="dropdown-item" href="calculadora.html">Calculadora</a>
+                            <a class="dropdown-item" href="monitoreo.html">Monitoreo</a>
+                            <a class="dropdown-item" href="analisis.html">Análisis</a>
+                            <a class="dropdown-item" href="reportes.html">Reportes</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="user-menu">
+                    <span id="welcomeUser" class="welcome">Bienvenido, Usuario</span>
+                    <button id="logoutBtn" class="logout-btn">Salir</button>
+                </div>
+            </div>
+        </nav>
+
+        <main class="main-content" id="mainContent" tabindex="-1">
+            <section class="content-section impl-hero">
+                <h2 class="section-title">Implementación de Segmentación</h2>
+                <p class="definition-text impl-intro">
+                    La implementación exitosa requiere <strong>planificación</strong>, <strong>configuración</strong> y
+                    <strong>monitoreo</strong> continuo. Explora cada paso y su analogía para niños.
+                </p>
+
+                <div class="step-grid" id="implementationGrid">
+                    <!-- Paso 1 -->
+                    <article class="step-card" data-step>
+                        <header class="step-header">
+                            <span class="emoji-badge" role="img" aria-label="Planificación">📝</span>
+                            <h3 class="step-title">1. Planificación</h3>
+                        </header>
+
+                        <p class="step-text">
+                            Análisis de requisitos y diseño de la arquitectura de red (zonas, VLAN, routing, ACL y
+                            controles).
+                        </p>
+
+                        <div class="step-details">
+                            <ul>
+                                <li>Identificar activos y <strong>clasificar</strong> datos/servicios.</li>
+                                <li>Definir dominios: <em>LAN</em>, <em>DMZ</em>, <em>IoT</em>, invitados, etc.</li>
+                                <li>Elegir tecnologías (VLAN, VRF, SDN, firewalls, NAC).</li>
+                            </ul>
+                        </div>
+
+                        <div class="step-analogy" hidden>
+                            <h4>Analogía para niños</h4>
+                            <p>
+                                Es como <strong>organizar una fiesta en casa</strong>: decides qué cuartos serán para
+                                juegos, comida y descanso. Haces un <em>mapa</em> y pones letreros para que nadie se
+                                pierda.
+                            </p>
+                        </div>
+
+                        <button class="step-toggle" aria-expanded="false">Ver analogía</button>
+                    </article>
+
+                    <!-- Paso 2 -->
+                    <article class="step-card" data-step>
+                        <header class="step-header">
+                            <span class="emoji-badge" role="img" aria-label="Configuración">⚙️</span>
+                            <h3 class="step-title">2. Configuración</h3>
+                        </header>
+
+                        <p class="step-text">
+                            Implementación de VLANs, subredes, enrutamiento, ACL/Firewall, listas de control y políticas
+                            de acceso.
+                        </p>
+
+                        <div class="step-details">
+                            <ul>
+                                <li>Crear VLANs y <strong>segmentos</strong> por función o sensibilidad.</li>
+                                <li>Configurar inter-VLAN routing de forma <em>controlada</em>.</li>
+                                <li>Aplicar reglas <strong>mínimo privilegio</strong> (Zero Trust).</li>
+                            </ul>
+                        </div>
+
+                        <div class="step-analogy" hidden>
+                            <h4>Analogía para niños</h4>
+                            <p>
+                                Como <strong>poner reglas y etiquetas de colores</strong> en la fiesta: los que tienen
+                                etiqueta azul juegan en la sala, los rojos comen en la cocina. Solo pasan por las
+                                <em>puertas</em> permitidas.
+                            </p>
+                        </div>
+
+                        <button class="step-toggle" aria-expanded="false">Ver analogía</button>
+                    </article>
+
+                    <!-- Paso 3 -->
+                    <article class="step-card" data-step>
+                        <header class="step-header">
+                            <span class="emoji-badge" role="img" aria-label="Monitoreo">🔎</span>
+                            <h3 class="step-title">3. Monitoreo</h3>
+                        </header>
+
+                        <p class="step-text">
+                            Supervisión continua, telemetría y ajustes de políticas para mantener la segmentación
+                            efectiva.
+                        </p>
+
+                        <div class="step-details">
+                            <ul>
+                                <li>Métricas de tráfico por zona y alertas de anomalías.</li>
+                                <li>Revisión periódica de reglas, accesos y <strong>logs</strong>.</li>
+                                <li>Pruebas de penetración y simulaciones de incidentes.</li>
+                            </ul>
+                        </div>
+
+                        <div class="step-analogy" hidden>
+                            <h4>Analogía para niños</h4>
+                            <p>
+                                Como un <strong>vigilante con lupa</strong> en la fiesta: revisa que todos sigan las
+                                reglas,
+                                que no haya empujones y que cada quien esté en su cuarto.
+                            </p>
+                        </div>
+
+                        <button class="step-toggle" aria-expanded="false">Ver analogía</button>
+                    </article>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <!-- Modal global -->
+    <div class="modal" id="appModal" hidden aria-hidden="true" role="dialog" aria-modal="true"
+        aria-labelledby="modalTitle">
+        <div class="modal-backdrop" data-modal-close></div>
+        <div class="modal-dialog" role="document">
+            <header class="modal-header">
+                <h3 id="modalTitle">Título del modal</h3>
+                <button class="modal-close" data-modal-close aria-label="Cerrar">✕</button>
+            </header>
+            <div class="modal-body" id="modalBody">Contenido del modal…</div>
+            <footer class="modal-footer">
+                <button class="btn" data-modal-close>Cerrar</button>
+            </footer>
+        </div>
+    </div>
+
+    <!-- JS global -->
+    <script src="../assets/js/background.js" defer></script>
+    <script src="../assets/js/effects.js" defer></script>
+    <script src="../assets/js/nav.js" defer></script>
+    <script src="../assets/js/auth.js" defer></script>
+    <script src="../assets/js/modal.js" defer></script>
+    <script src="../assets/js/app.js" defer></script>
+
+    <!-- JS específico -->
+    <script src="../assets/js/implementacion.js" defer></script>
+
+    
+
+</body>
+
+</html>
