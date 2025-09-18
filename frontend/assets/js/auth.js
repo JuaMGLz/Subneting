@@ -30,22 +30,23 @@
     if (main) main.focus();
   }
 
-  // Manejar el envío del formulario de login
-  if (loginForm) {
-    loginForm.addEventListener("submit", (e) => {
-      e.preventDefault();
-      const username =
-        (document.getElementById("username") || {}).value || "Usuario";
-      const password = (document.getElementById("password") || {}).value || "";
+// Manejar el envío del formulario de login
+if (loginForm) {
+  loginForm.addEventListener("submit", (e) => {
+    e.preventDefault();
+    const username =
+      (document.getElementById("username") || {}).value || "Usuario";
+    // La variable 'password' ya no es necesaria
+    // const password = (document.getElementById("password") || {}).value || "";
 
-      // Validación mínima (simulada)
-      if (username && password) {
-        showDashboard(username);
-      } else {
-        alert("Por favor, completa todos los campos.");
-      }
-    });
-  }
+    // Validación mínima, solo se comprueba el nombre de usuario
+    if (username) {
+      showDashboard(username);
+    } else {
+      alert("Por favor, ingresa tu usuario.");
+    }
+  });
+}
 
   // Manejar el cierre de sesión
   if (logoutBtn) {

@@ -15,39 +15,42 @@
   const loginForm = document.getElementById("loginForm");
 
   // Lógica de autenticación
-  function handleLogin() {
-    if (loginForm) {
-      // Escucha el evento de envío del formulario
-      loginForm.addEventListener("submit", function (e) {
-        e.preventDefault();
+function handleLogin() {
+    if (loginForm) {
+        loginForm.addEventListener("submit", function (e) {
+            e.preventDefault();
 
-        const username = document.getElementById("username").value;
-        const password = document.getElementById("password").value;
+            const username = document.getElementById("username").value;
+            
 
-        // Validación simple: que los campos no estén vacíos
-        if (username && password) {
-          // Guarda el nombre de usuario para su uso en otras páginas
-          localStorage.setItem("currentUser", username);
-
-          // Redirige al usuario al dashboard principal
-          window.location.href = "definicion.html";
-        } else {
-          alert("Por favor, completa todos los campos.");
-        }
-      });
-    }
-  }
+            if (username) {
+                localStorage.setItem("currentUser", username);
+                window.location.href = "definicion.html";
+            }
+        });
+    }
+}
 
   // Lógica de logout
-  function handleLogout() {
-    const logoutBtn = document.getElementById("logoutBtn");
-    if (logoutBtn) {
-      logoutBtn.addEventListener("click", function () {
-        localStorage.removeItem("currentUser");
-        window.location.href = "index.html";
-      });
-    }
-  }
+function handleLogin() {
+    if (loginForm) {
+        loginForm.addEventListener("submit", function (e) {
+            e.preventDefault();
+
+            const username = document.getElementById("username").value;
+            // La línea de la contraseña ya no es necesaria
+            // const password = document.getElementById("password").value;
+
+            // Solo se valida que el campo de usuario no esté vacío
+            if (username) {
+                localStorage.setItem("currentUser", username);
+                window.location.href = "definicion.html";
+            } else {
+                alert("Por favor, ingresa tu usuario.");
+            }
+        });
+    }
+}
 
   // Lógica de inicialización al cargar la página
   function initialize() {
