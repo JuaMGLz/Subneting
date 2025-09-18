@@ -3,9 +3,9 @@
 <head>
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Calculadora Inteligente de Subredes</title>
+  <title>Sistema Adaptativo de Validación de Subredes</title>
 
-  <!-- Orden recomendado (tus CSS) -->
+  <!-- Tus CSS globales (orden recomendado) -->
   <link rel="stylesheet" href="../assets/css/theme.css">
   <link rel="stylesheet" href="../assets/css/base.css">
   <link rel="stylesheet" href="../assets/css/components.css">
@@ -14,15 +14,14 @@
   <link rel="stylesheet" href="../assets/css/content.css">
 
   <!-- CSS específico de esta página -->
-  <link rel="stylesheet" href="../assets/css/content_calculadora.css">
+  <link rel="stylesheet" href="../assets/css/content_validacion.css">
 </head>
 
 <body>
-  <!-- Fondo / layout global -->
   <div class="network-background" id="networkBg" aria-hidden="true"></div>
 
   <div class="dashboard" id="dashboardPage">
-    <!-- NAVBAR igual a las demás páginas -->
+    <!-- NAVBAR consistente -->
     <nav class="navbar">
       <div class="navbar-content">
         <div class="logo" aria-label="UAEMCITOS">🌐 UAEMCITOS</div>
@@ -44,7 +43,7 @@
           </div>
 
           <div class="nav-item" role="none">
-            <button class="nav-link" data-dropdown="tools" aria-expanded="true" aria-controls="toolsDropdown" role="menuitem">
+            <button class="nav-link" data-dropdown="tools" aria-expanded="false" aria-controls="toolsDropdown" role="menuitem">
               Herramientas <span class="caret">▼</span>
             </button>
 <div class="dropdown" id="toolsDropdown" hidden>
@@ -65,57 +64,69 @@
     <!-- CONTENIDO -->
     <main class="main-content" id="mainContent" tabindex="-1">
       <section class="content-section">
-        <h2 class="section-title">🧮 Calculadora Inteligente de Subredes</h2>
-        <p class="definition-text">Ingresa una red base y el número de subredes para obtener el desglose completo.</p>
+        <h2 class="section-title">✅ Sistema Adaptativo de Validación</h2>
+        <p class="definition-text">Responde preguntas que se ajustan a tu nivel y gana experiencia mientras mejoras.</p>
 
         <!-- Toasts -->
         <div class="toast-container" id="toastContainer" aria-live="polite" aria-atomic="true"></div>
 
         <!-- Card principal -->
-        <div class="panel elevated calc-wrap">
-          <form class="calculator-section v-stack gap-md" id="calcForm" novalidate>
-            <div class="input-group" id="networkGroup">
-              <label for="networkInput" class="label">Red Base (ej.: 192.168.1.0/24)</label>
-              <input type="text" id="networkInput" class="input" placeholder="192.168.1.0/24" value="192.168.1.0/24" autocomplete="off" inputmode="numeric">
-              <p class="error-message" id="networkError"></p>
-              <p class="success-message" id="networkSuccess"></p>
-            </div>
+        <div class="panel elevated validacion-wrap">
+          <!-- Sistema de niveles -->
+          <div class="level-system">
+            <h3 class="subtitle">Sistema de Progresión</h3>
+            <span class="level-badge" id="currentLevel">Nivel 1: Principiante</span>
+            <span class="level-badge" id="currentXP">0 XP</span>
+            <div class="progress-bar"><div class="progress-fill" id="xpProgress"></div></div>
+          </div>
+
+          <!-- Pregunta / quiz -->
+          <article class="quiz-card" aria-live="polite">
+            <span class="difficulty-indicator" id="difficultyBadge">Fácil</span>
+            <h3 class="subtitle">Pregunta Actual</h3>
+            <p id="currentQuestion" class="question">Preparando pregunta adaptativa...</p>
 
             <div class="input-group">
-              <label for="subnetCount" class="label">Número de Subredes Deseadas</label>
-              <select id="subnetCount" class="input">
-                <option value="2">2 subredes (1 bit adicional)</option>
-                <option value="4">4 subredes (2 bits adicionales)</option>
-                <option value="8">8 subredes (3 bits adicionales)</option>
-                <option value="16">16 subredes (4 bits adicionales)</option>
-                <option value="32">32 subredes (5 bits adicionales)</option>
-              </select>
+              <label for="answerInput" class="label">Tu respuesta:</label>
+              <input type="text" id="answerInput" class="input" placeholder="Ejemplo: 192.168.1.0/26" autocomplete="off">
             </div>
 
-            <button class="btn btn-primary w-100" id="calculateBtn" type="button" data-action="calculate">
-              🚀 Calcular Subredes Inteligentemente
-            </button>
-
-            <div class="progress-bar" id="progressBar" hidden>
-              <div class="progress-fill" id="progressFill"></div>
+            <div class="actions">
+              <button class="btn btn-primary" data-action="check">🎯 Verificar Respuesta</button>
+              <button class="btn btn-secondary" data-action="new">🔄 Nueva Pregunta</button>
+              <button class="btn btn-warning hint-btn" data-action="hint">💡 Pista</button>
             </div>
-          </form>
 
-          <div class="table-wrap">
-            <table class="results-table" id="resultsTable" aria-describedby="networkInput subnetCount">
-              <thead>
-                <tr>
-                  <th>Subred #</th>
-                  <th>Dirección de Red</th>
-                  <th>Primer Host</th>
-                  <th>Último Host</th>
-                  <th>Broadcast</th>
-                  <th>Máscara</th>
-                  <th>Hosts Disponibles</th>
-                </tr>
-              </thead>
-              <tbody id="resultsBody"></tbody>
-            </table>
+            <div class="hint-system">
+              <div class="hint-content" id="hintContent"><strong>💡 Pista:</strong> <span id="hintText"></span></div>
+            </div>
+
+            <div id="feedback"></div>
+          </article>
+
+          <!-- Stats -->
+          <div class="stats">
+            <div class="stat-item">
+              <div class="stat-number" id="correctCount">0</div>
+              <div>Correctas</div>
+            </div>
+            <div class="stat-item">
+              <div class="stat-number" id="totalCount">0</div>
+              <div>Total</div>
+            </div>
+            <div class="stat-item">
+              <div class="stat-number" id="accuracy">0%</div>
+              <div>Precisión</div>
+            </div>
+            <div class="stat-item">
+              <div class="stat-number" id="streak">0</div>
+              <div>Racha</div>
+            </div>
+          </div>
+
+          <div class="center">
+            <button class="btn btn-success" data-action="reset">🔄 Reiniciar Progreso</button>
+            <button class="btn btn-primary" data-action="export">📊 Exportar Estadísticas</button>
           </div>
         </div>
       </section>
@@ -130,7 +141,7 @@
   <script src="../assets/js/modal.js" defer></script>
   <script src="../assets/js/app.js" defer></script>
 
-  <!-- JS específico de esta página -->
-  <script src="../assets/js/calculadora.js" defer></script>
+  <!-- JS específico -->
+  <script src="../assets/js/validacion.js" defer></script>
 </body>
 </html>
