@@ -1,147 +1,130 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8"/>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Sistema Adaptativo de Validación de Subredes</title>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Sistema Adaptativo de Validación de Subredes</title>
 
-  <!-- Tus CSS globales (orden recomendado) -->
-  <link rel="stylesheet" href="../assets/css/theme.css">
-  <link rel="stylesheet" href="../assets/css/base.css">
-  <link rel="stylesheet" href="../assets/css/components.css">
-  <link rel="stylesheet" href="../assets/css/navbar.css">
-  <link rel="stylesheet" href="../assets/css/background.css">
-  <link rel="stylesheet" href="../assets/css/content.css">
+    <link rel="stylesheet" href="../assets/css/theme.css">
+    <link rel="stylesheet" href="../assets/css/base.css">
+    <link rel="stylesheet" href="../assets/css/components.css">
+    <link rel="stylesheet" href="../assets/css/navbar.css">
+    <link rel="stylesheet" href="../assets/css/background.css">
+    <link rel="stylesheet" href="../assets/css/content.css">
 
-  <!-- CSS específico de esta página -->
-  <link rel="stylesheet" href="../assets/css/content_validacion.css">
+    <link rel="stylesheet" href="../assets/css/content_validacion.css">
 </head>
 
 <body>
-  <div class="network-background" id="networkBg" aria-hidden="true"></div>
+    <div class="network-background" id="networkBg" aria-hidden="true"></div>
 
-  <div class="dashboard" id="dashboardPage">
-    <!-- NAVBAR consistente -->
-    <nav class="navbar">
-      <div class="navbar-content">
-        <div class="logo" aria-label="UAEMCITOS">🌐 UAEMCITOS</div>
-
-        <div class="nav-menu" role="menubar">
-          <div class="nav-item" role="none">
-            <a class="nav-link" href="../definicion.html" role="menuitem">Definición</a>
-          </div>
-
-          <div class="nav-item" role="none">
-            <button class="nav-link" data-dropdown="concepts" aria-expanded="false" aria-controls="conceptsDropdown" role="menuitem">
-              Conceptos <span class="caret">▼</span>
-            </button>
-            <div class="dropdown" id="conceptsDropdown" hidden>
-              <a class="dropdown-item" href="./tipos_segmentacion.html">Tipos de Segmentación</a>
-              <a class="dropdown-item" href="./beneficios.html">Beneficios</a>
-              <a class="dropdown-item" href="./implementacion.html">Implementación</a>
-            </div>
-          </div>
-
-          <div class="nav-item" role="none">
-            <button class="nav-link" data-dropdown="tools" aria-expanded="false" aria-controls="toolsDropdown" role="menuitem">
-              Herramientas <span class="caret">▼</span>
-            </button>
-<div class="dropdown" id="toolsDropdown" hidden>
+    <div class="dashboard" id="dashboardPage">
+        <nav class="navbar">
+            <div class="navbar-content">
+                <div class="logo" aria-label="UAEMCITOS">🌐 UAEMCITOS</div>
+                <div class="nav-menu" role="menubar">
+                    <div class="nav-item" role="none">
+                        <a class="nav-link" href="../definicion.html" role="menuitem">Definición</a>
+                    </div>
+                    <div class="nav-item" role="none">
+                        <button class="nav-link" data-dropdown="concepts" aria-expanded="false" aria-controls="conceptsDropdown" role="menuitem">
+                            Conceptos <span class="caret">▼</span>
+                        </button>
+                        <div class="dropdown" id="conceptsDropdown" hidden>
+                            <a class="dropdown-item" href="./tipos_segmentacion.html">Tipos de Segmentación</a>
+                            <a class="dropdown-item" href="./beneficios.html">Beneficios</a>
+                            <a class="dropdown-item" href="./implementacion.html">Implementación</a>
+                        </div>
+                    </div>
+                    <div class="nav-item" role="none">
+                        <button class="nav-link" data-dropdown="tools" aria-expanded="false" aria-controls="toolsDropdown" role="menuitem">
+                            Herramientas <span class="caret">▼</span>
+                        </button>
+                        <div class="dropdown" id="toolsDropdown" hidden>
                             <a class="dropdown-item" href="/frontend/pages/division.html">División Visual de Subredes</a>
                             <a class="dropdown-item" href="/frontend/pages/calculadora.html">Calculadora Inteligente de Subredes</a>
                             <a class="dropdown-item" href="/frontend/pages/validacion.html">Sistema Adaptativo de Validación</a>
                         </div>
-          </div>
-        </div>
+                    </div>
+                </div>
 
-        <div class="user-menu">
-          <span id="welcomeUser" class="welcome">Bienvenido, Usuario</span>
-          <button id="logoutBtn" class="logout-btn">Salir</button>
-        </div>
-      </div>
-    </nav>
-
-    <!-- CONTENIDO -->
-    <main class="main-content" id="mainContent" tabindex="-1">
-      <section class="content-section">
-        <h2 class="section-title">✅ Sistema Adaptativo de Validación</h2>
-        <p class="definition-text">Responde preguntas que se ajustan a tu nivel y gana experiencia mientras mejoras.</p>
-
-        <!-- Toasts -->
-        <div class="toast-container" id="toastContainer" aria-live="polite" aria-atomic="true"></div>
-
-        <!-- Card principal -->
-        <div class="panel elevated validacion-wrap">
-          <!-- Sistema de niveles -->
-          <div class="level-system">
-            <h3 class="subtitle">Sistema de Progresión</h3>
-            <span class="level-badge" id="currentLevel">Nivel 1: Principiante</span>
-            <span class="level-badge" id="currentXP">0 XP</span>
-            <div class="progress-bar"><div class="progress-fill" id="xpProgress"></div></div>
-          </div>
-
-          <!-- Pregunta / quiz -->
-          <article class="quiz-card" aria-live="polite">
-            <span class="difficulty-indicator" id="difficultyBadge">Fácil</span>
-            <h3 class="subtitle">Pregunta Actual</h3>
-            <p id="currentQuestion" class="question">Preparando pregunta adaptativa...</p>
-
-            <div class="input-group">
-              <label for="answerInput" class="label">Tu respuesta:</label>
-              <input type="text" id="answerInput" class="input" placeholder="Ejemplo: 192.168.1.0/26" autocomplete="off">
+                <div class="user-menu">
+                    <span id="welcomeUser" class="welcome">Bienvenido, Usuario</span>
+                    <button id="logoutBtn" class="btn-logout">Salir</button>
+                </div>
             </div>
+        </nav>
 
-            <div class="actions">
-              <button class="btn btn-primary" data-action="check">🎯 Verificar Respuesta</button>
-              <button class="btn btn-secondary" data-action="new">🔄 Nueva Pregunta</button>
-              <button class="btn btn-warning hint-btn" data-action="hint">💡 Pista</button>
-            </div>
+        <main class="main-content" id="mainContent" tabindex="-1">
+            <section class="content-section">
+                <h2 class="section-title">✅ Sistema Adaptativo de Validación</h2>
+                <p class="definition-text">Responde preguntas que se ajustan a tu nivel y gana experiencia mientras mejoras.</p>
+                <div class="toast-container" id="toastContainer" aria-live="polite" aria-atomic="true"></div>
 
-            <div class="hint-system">
-              <div class="hint-content" id="hintContent"><strong>💡 Pista:</strong> <span id="hintText"></span></div>
-            </div>
+                <div class="panel elevated validacion-wrap">
+                    <div class="level-system">
+                        <h3 class="subtitle">Sistema de Progresión</h3>
+                        <span class="level-badge" id="currentLevel">Nivel 1: Principiante</span>
+                        <span class="level-badge" id="currentXP">0 XP</span>
+                        <div class="progress-bar"><div class="progress-fill" id="xpProgress"></div></div>
+                    </div>
 
-            <div id="feedback"></div>
-          </article>
+                    <article class="quiz-card" aria-live="polite">
+                        <span class="difficulty-indicator" id="difficultyBadge">Fácil</span>
+                        <h3 class="subtitle">Pregunta Actual</h3>
+                        <p id="currentQuestion" class="question">Preparando pregunta adaptativa...</p>
 
-          <!-- Stats -->
-          <div class="stats">
-            <div class="stat-item">
-              <div class="stat-number" id="correctCount">0</div>
-              <div>Correctas</div>
-            </div>
-            <div class="stat-item">
-              <div class="stat-number" id="totalCount">0</div>
-              <div>Total</div>
-            </div>
-            <div class="stat-item">
-              <div class="stat-number" id="accuracy">0%</div>
-              <div>Precisión</div>
-            </div>
-            <div class="stat-item">
-              <div class="stat-number" id="streak">0</div>
-              <div>Racha</div>
-            </div>
-          </div>
+                        <div class="input-group">
+                            <label for="answerInput" class="label">Tu respuesta:</label>
+                            <input type="text" id="answerInput" class="input" placeholder="Ejemplo: 192.168.1.0/26" autocomplete="off">
+                        </div>
 
-          <div class="center">
-            <button class="btn btn-success" data-action="reset">🔄 Reiniciar Progreso</button>
-            <button class="btn btn-primary" data-action="export">📊 Exportar Estadísticas</button>
-          </div>
-        </div>
-      </section>
-    </main>
-  </div>
+                        <div class="actions">
+                            <button class="btn btn-primary" data-action="check">🎯 Verificar Respuesta</button>
+                            <button class="btn btn-secondary" data-action="new">🔄 Nueva Pregunta</button>
+                            <button class="btn btn-warning hint-btn" data-action="hint">💡 Pista</button>
+                        </div>
+                        <div class="hint-system">
+                            <div class="hint-content" id="hintContent"><strong>💡 Pista:</strong> <span id="hintText"></span></div>
+                        </div>
+                        <div id="feedback"></div>
+                    </article>
 
-  <!-- JS globales del sitio -->
-  <script src="../assets/js/background.js" defer></script>
-  <script src="../assets/js/effects.js" defer></script>
-  <script src="../assets/js/nav.js" defer></script>
-  <script src="../assets/js/auth.js" defer></script>
-  <script src="../assets/js/modal.js" defer></script>
-  <script src="../assets/js/app.js" defer></script>
+                    <div class="stats">
+                        <div class="stat-item">
+                            <div class="stat-number" id="correctCount">0</div>
+                            <div>Correctas</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-number" id="totalCount">0</div>
+                            <div>Total</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-number" id="accuracy">0%</div>
+                            <div>Precisión</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-number" id="streak">0</div>
+                            <div>Racha</div>
+                        </div>
+                    </div>
 
-  <!-- JS específico -->
-  <script src="../assets/js/validacion.js" defer></script>
+                    <div class="center">
+                        <button class="btn btn-secondary" data-action="reset">🔄 Reiniciar Progreso</button>
+                        <button class="btn btn-primary" data-action="export">📊 Exportar Estadísticas</button>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <script src="../assets/js/background.js" defer></script>
+    <script src="../assets/js/effects.js" defer></script>
+    <script src="../assets/js/nav.js" defer></script>
+    <script src="../assets/js/auth.js" defer></script>
+    <script src="../assets/js/modal.js" defer></script>
+    <script src="../assets/js/app.js" defer></script>
+
+    <script src="../assets/js/validacion.js" defer></script>
 </body>
 </html>
