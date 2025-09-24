@@ -362,38 +362,43 @@
     <div class="network-background" id="networkBg" aria-hidden="true"></div>
 
     <div class="dashboard" id="dashboardPage">
-        <nav class="navbar">
+<nav class="navbar">
             <div class="navbar-content">
                 <div class="logo" aria-label="UAEMCITOS">🌐 UAEMCITOS</div>
+
                 <div class="nav-menu" role="menubar">
                     <div class="nav-item" role="none">
-                        <a class="nav-link" href="../definicion.html" role="menuitem">Definición</a>
+                        <a class="nav-link" href="definicion.html" role="menuitem">Definición</a>
                     </div>
+
                     <div class="nav-item" role="none">
-                        <button class="nav-link" data-dropdown="concepts" aria-expanded="false" aria-controls="conceptsDropdown" role="menuitem">
-                            Conceptos <span class="caret">▼</span>
+                        <button class="nav-link" data-dropdown="concepts" aria-expanded="false"
+                            aria-controls="conceptsDropdown" role="menuitem">
+                            Metodos de creación <span class="caret">▼</span>
                         </button>
                         <div class="dropdown" id="conceptsDropdown" hidden>
-                            <a class="dropdown-item" href="./tipos_segmentacion.html">Tipos de Segmentación</a>
-                            <a class="dropdown-item" href="./beneficios.html">Beneficios</a>
-                            <a class="dropdown-item" href="./implementacion.html">Implementación</a>
+                            <a class="dropdown-item" href="pages/tipos_segmentacion.html">Conversión a binario</a>
+                            <a class="dropdown-item" href="pages/beneficios.html">Beneficios</a>
+                            <a class="dropdown-item" href="pages/implementacion.html">Implementación</a>
                         </div>
                     </div>
+
                     <div class="nav-item" role="none">
-                        <button class="nav-link" data-dropdown="tools" aria-expanded="false" aria-controls="toolsDropdown" role="menuitem">
+                        <button class="nav-link" data-dropdown="tools" aria-expanded="false"
+                            aria-controls="toolsDropdown" role="menuitem">
                             Herramientas <span class="caret">▼</span>
                         </button>
                         <div class="dropdown" id="toolsDropdown" hidden>
                             <a class="dropdown-item" href="/frontend/pages/division.html">Visualizador de Red</a>
-                            <a class="dropdown-item" href="/frontend/pages/calculadora.html">Calculadora de Subredes</a>
-                            <a class="dropdown-item" href="/frontend/pages/validacion.html">Comprueba tu Nivel</a>
+                            <a class="dropdown-item" href="pages/calculadora.html">Calculadora de Subredes</a>
+                            <a class="dropdown-item" href="pages/validacion.html">Comprueba tu Nivel</a>
                         </div>
                     </div>
                 </div>
 
                 <div class="user-menu">
                     <span id="welcomeUser" class="welcome">Bienvenido, Usuario</span>
-                    <button id="logoutBtn" class="btn-logout">Salir</button>
+                    <button id="logoutBtn" class="logout-btn">Salir</button>
                 </div>
             </div>
         </nav>
@@ -460,230 +465,10 @@
             </section>
         </main>
     </div>
-    <script>
-    // JavaScript para el quiz de acceso
-    class QuizAccess {
-      constructor() {
-        this.correctAnswer = 'b'; // 192.168.10.0 es la respuesta correcta
-        this.selectedAnswer = null;
-        this.attempts = 0;
-        this.maxAttempts = 3;
-        this.init();
-      }
+<script src="/frontend/assets/js/pregunta.js" defer></script>
 
-      init() {
-        this.bindEvents();
-        this.updateProgress();
-      }
 
-      bindEvents() {
-        // Opciones de respuesta
-        const options = document.querySelectorAll('.quiz-option');
-        options.forEach(option => {
-          option.addEventListener('click', (e) => this.selectOption(e));
-        });
 
-        // Botón de verificar
-        document.getElementById('submitQuiz').addEventListener('click', () => this.checkAnswer());
-        
-        // Botón de reintentar
-        document.getElementById('retryQuiz').addEventListener('click', () => this.resetQuiz());
-      }
-
-      selectOption(e) {
-        // Limpiar selecciones previas
-        document.querySelectorAll('.quiz-option').forEach(opt => {
-          opt.classList.remove('selected');
-        });
-
-        // Seleccionar la nueva opción
-        e.target.classList.add('selected');
-        this.selectedAnswer = e.target.dataset.answer;
-
-        // Habilitar botón de verificar
-        document.getElementById('submitQuiz').disabled = false;
-      }
-
-      checkAnswer() {
-        this.attempts++;
-        const resultMessage = document.getElementById('resultMessage');
-        const submitBtn = document.getElementById('submitQuiz');
-        const retryBtn = document.getElementById('retryQuiz');
-
-        if (this.selectedAnswer === this.correctAnswer) {
-          // Respuesta correcta
-          resultMessage.innerHTML = `
-            <div class="result-message result-success">
-              🎉 ¡Excelente! Has demostrado que comprendes el concepto de direcciones IP.
-              <br><small>Con máscara /24, los primeros 24 bits (192.168.10) representan la red.</small>
-            </div>
-          `;
-
-          // Marcar opción correcta
-          document.querySelector(`[data-answer="${this.correctAnswer}"]`).classList.add('correct');
-
-          setTimeout(() => {
-            this.unlockContent();
-          }, 2000);
-
-        } else {
-          // Respuesta incorrecta
-          document.querySelector(`[data-answer="${this.selectedAnswer}"]`).classList.add('incorrect');
-          
-          if (this.attempts >= this.maxAttempts) {
-            resultMessage.innerHTML = `
-              <div class="result-message result-error">
-                ❌ Has agotado tus intentos. Serás redirigido para repasar el tema.
-                <br><small>La respuesta correcta era <strong>192.168.10.0</strong> - necesitas estudiar más sobre direcciones IP.</small>
-              </div>
-            `;
-            
-            document.querySelector(`[data-answer="${this.correctAnswer}"]`).classList.add('correct');
-            
-            // Mostrar countdown y redireccionar
-            let countdown = 5;
-            const countdownInterval = setInterval(() => {
-              resultMessage.innerHTML = `
-                <div class="result-message result-error">
-                  ❌ Intentos agotados. Redirigiendo a la página de estudio en <strong>${countdown}</strong> segundos...
-                  <br><small>Debes repasar el tema de direcciones IP antes de continuar.</small>
-                </div>
-              `;
-              countdown--;
-              
-              if (countdown < 0) {
-                clearInterval(countdownInterval);
-                // Redireccionar a página de estudio (cambia la URL según necesites)
-                window.location.href = 'definicion.html';
-              }
-            }, 1000);
-          } else {
-            const remaining = this.maxAttempts - this.attempts;
-            resultMessage.innerHTML = `
-              <div class="result-message result-error">
-                ❌ Respuesta incorrecta. Te quedan ${remaining} intento${remaining > 1 ? 's' : ''}.
-                <br><small>Recuerda: con /24, los primeros 24 bits representan la parte de red.</small>
-              </div>
-            `;
-            
-            submitBtn.style.display = 'none';
-            retryBtn.style.display = 'inline-block';
-          }
-        }
-
-        submitBtn.disabled = true;
-        this.updateProgress();
-      }
-
-      resetQuiz() {
-        // Limpiar selecciones y estilos
-        document.querySelectorAll('.quiz-option').forEach(opt => {
-          opt.classList.remove('selected', 'incorrect', 'correct');
-        });
-
-        // Resetear estado
-        this.selectedAnswer = null;
-        document.getElementById('resultMessage').innerHTML = '';
-        document.getElementById('submitQuiz').disabled = true;
-        document.getElementById('submitQuiz').style.display = 'inline-block';
-        document.getElementById('retryQuiz').style.display = 'none';
-        
-        this.updateProgress();
-      }
-
-      updateProgress() {
-        const progress = (this.attempts / this.maxAttempts) * 100;
-        document.getElementById('progressFill').style.width = `${Math.min(progress, 100)}%`;
-      }
-
-      unlockContent() {
-        // Ocultar modal con animación
-        const modal = document.getElementById('quizModal');
-        modal.style.animation = 'fadeOut 0.5s ease';
-        
-        setTimeout(() => {
-          modal.style.display = 'none';
-          
-          // Desbloquear contenido
-          const dashboard = document.getElementById('dashboardPage');
-          dashboard.classList.remove('content-locked');
-          dashboard.style.filter = 'none';
-          dashboard.style.pointerEvents = 'all';
-          dashboard.style.userSelect = 'auto';
-
-          // Mostrar mensaje de bienvenida
-          this.showWelcomeMessage();
-        }, 500);
-      }
-
-      showWelcomeMessage() {
-        // Crear toast de bienvenida
-        const toast = document.createElement('div');
-        toast.style.cssText = `
-          position: fixed;
-          top: 20px;
-          right: 20px;
-          background: linear-gradient(45deg, #4ade80, #22c55e);
-          color: white;
-          padding: 20px 25px;
-          border-radius: 12px;
-          box-shadow: 0 10px 25px rgba(34, 197, 94, 0.3);
-          z-index: 1000;
-          animation: slideInRight 0.5s ease;
-          max-width: 300px;
-        `;
-        
-        toast.innerHTML = `
-          <div style="font-weight: bold; margin-bottom: 5px;">🎉 ¡Acceso Concedido!</div>
-          <div style="font-size: 0.9em; opacity: 0.9;">Ahora puedes explorar el Visualizador de Red</div>
-        `;
-
-        document.body.appendChild(toast);
-
-        setTimeout(() => {
-          toast.style.animation = 'slideOutRight 0.5s ease';
-          setTimeout(() => toast.remove(), 500);
-        }, 4000);
-      }
-    }
-
-    // CSS para animaciones adicionales
-    const additionalStyles = document.createElement('style');
-    additionalStyles.textContent = `
-      @keyframes fadeOut {
-        from { opacity: 1; }
-        to { opacity: 0; }
-      }
-      
-      @keyframes slideInRight {
-        from { 
-          opacity: 0;
-          transform: translateX(100%);
-        }
-        to { 
-          opacity: 1;
-          transform: translateX(0);
-        }
-      }
-      
-      @keyframes slideOutRight {
-        from { 
-          opacity: 1;
-          transform: translateX(0);
-        }
-        to { 
-          opacity: 0;
-          transform: translateX(100%);
-        }
-      }
-    `;
-    document.head.appendChild(additionalStyles);
-
-    // Inicializar el quiz cuando cargue la página
-    document.addEventListener('DOMContentLoaded', () => {
-      new QuizAccess();
-    });
-  </script>
     <script src="../assets/js/background.js" defer></script>
     <script src="../assets/js/effects.js" defer></script>
     <script src="../assets/js/nav.js" defer></script>
