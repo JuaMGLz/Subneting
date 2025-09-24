@@ -1,133 +1,107 @@
 // assets/js/content.js
 (function () {
-  const NetApp = (window.NetApp = window.NetApp || {});
+    const NetApp = (window.NetApp = window.NetApp || {});
 
-  const templates = {
-    definition: `
-      <div class="content-section">
-        <h2 class="section-title">¿Qué es la Segmentación de Redes?</h2>
-        <p class="definition-text">
-          La <strong>segmentación de redes</strong> divide una red en múltiples segmentos o subredes más pequeñas.
-          Permite aislar activos críticos, aplicar el principio de <em>acceso mínimo necesario</em> y mejorar el control del tráfico.
-        </p>
+    const templates = {
+        definition: `
+            <header class="content-section text-center">
+                <h1 class="section-title">Subnetting de Redes</h1>
+                <p class="section-subtitle">La forma más sencilla de entender cómo se dividen las redes</p>
+            </header>
 
-        <div class="image-gallery">
-          <!-- ========== Tarjeta: Red Tradicional (flip) ========== -->
-          <div class="image-card">
-            <div class="network-diagram">🔗 → 🔗 → 🔗</div>
-            <div class="image-title">Red Tradicional</div>
-            <div class="image-description">
-              Todos los dispositivos conviven en un mismo dominio de broadcast.
+            <div class="content-section">
+                <h2 class="section-title">¿Qué es el Subnetting?</h2>
+                <p class="definition-text">
+                    El <strong>subnetting</strong> es la técnica de dividir un bloque de direcciones IP de una red principal en subredes más pequeñas y eficientes. Esta división se logra tomando bits de la porción de 'host' de la dirección IP y asignándolos a la porción de 'red'. El objetivo principal es reducir el tamaño de los dominios de broadcast, optimizar el uso de direcciones IP y mejorar la seguridad y el rendimiento de la red.
+                </p>
             </div>
 
-            <div class="flip-card" data-flip role="button" tabindex="0" aria-label="Voltear tarjeta de analogía">
-              <div class="flip-inner">
-                <!-- Frente: imagen -->
-                <div class="flip-face flip-front">
-                  <img
-                    src="assets/images/tradicional.png"
-                    alt="Topología de red tradicional"
-                    loading="eager"
-                    decoding="async"
-                    onerror="this.outerHTML='<div style=&quot;color:#fff;padding:16px;text-align:center&quot;>No se encontró <strong>assets/images/tradicional.png</strong></div>'"
-                  />
-                  <span class="flip-hint">Haz clic para voltear ⟲</span>
+            <div class="content-section">
+                <h2 class="section-title">Piensa en una Ciudad...</h2>
+                <p class="definition-text">
+                    Imagina una ciudad enorme. Cada casa tiene una dirección única para que el correo llegue a donde debe. En el mundo de las redes, tu casa es una computadora y tu dirección es una <strong>dirección IP</strong>.
+                </p>
+                <p class="definition-text">
+                    Al principio, toda la ciudad es un solo barrio. Esto funciona bien si hay pocas casas, pero si la ciudad crece mucho, se vuelve un caos. El cartero se pierde y las entregas son muy lentas.
+                </p>
+                <div class="image-gallery">
+                    <div class="image-card">
+                        <img src="assets/images/ciudad.webp" alt="Ilustración de una ciudad muy grande y ocupada" />
+                        <div class="image-title">Una Red Grande</div>
+                        <div class="image-description">
+                            Como una ciudad sin barrios, se vuelve ineficiente y difícil de gestionar.
+                        </div>
+                    </div>
                 </div>
-
-                <!-- Reverso: analogía (sin imagen) -->
-                <div class="flip-face flip-back">
-                  <div class="analogy-panel">
-                    <h4>Analogía: un solo patio de recreo</h4>
-                    <p>Imagina que toda la escuela juega en <strong>un mismo patio sin divisiones</strong>.</p>
-                    <ul>
-                      <li><strong>Todos oyen todo:</strong> si alguien grita “¡Pelota!”, <em>todos</em> se distraen. 🔔</li>
-                      <li><strong>Se hacen bolitas:</strong> todos quieren el mismo espacio; moverse es difícil. 🧑‍🤝‍🧑</li>
-                      <li><strong>Un tropiezo afecta a todos:</strong> cualquiera puede chocar con cualquiera. 😵</li>
-                    </ul>
-                    <small>Vuelve a hacer clic para regresar.</small>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <!-- ========== Tarjeta: Red Segmentada (flip) ========== -->
-          <div class="image-card">
-            <div class="network-diagram">🔗 | 🔗 | 🔗</div>
-            <div class="image-title">Red Segmentada</div>
-            <div class="image-description">
-              La red se divide en zonas separadas con reglas claras entre sí.
             </div>
 
-            <div class="flip-card" data-flip role="button" tabindex="0" aria-label="Voltear tarjeta de analogía">
-              <div class="flip-inner">
-                <!-- Frente: imagen -->
-                <div class="flip-face flip-front">
-                  <img
-                    src="assets/images/segmentada.png"
-                    alt="Topología de red segmentada"
-                    loading="eager"
-                    decoding="async"
-                    onerror="this.outerHTML='<div style=&quot;color:#fff;padding:16px;text-align:center&quot;>No se encontró <strong>assets/images/segmentada.png</strong></div>'"
-                  />
-                  <span class="flip-hint">Haz clic para voltear ⟲</span>
+            <div class="content-section">
+                <h2 class="section-title">El Problema y la Solución</h2>
+                <p class="definition-text">
+                    Cuando una red es muy grande, como esa ciudad, se vuelve lenta e insegura. Todos "gritan" al mismo tiempo para comunicarse, lo que causa congestión. Un solo fallo puede afectar a todos.
+                </p>
+                <p class="definition-text">
+                    La solución es simple: <strong>dividir la ciudad en barrios</strong>. Esto es exactamente lo que hace el <strong>subnetting</strong>.
+                </p>
+                <div class="image-gallery">
+                    <div class="image-card">
+                        <img src="assets/images/division_por_barrios.webp" alt="Ilustración de una ciudad dividida en barrios con letreros y nombres" />
+                        <div class="image-title">División en Subredes</div>
+                        <div class="image-description">
+                            Organizar la red en partes más pequeñas facilita el tráfico y mejora la seguridad.
+                        </div>
+                    </div>
                 </div>
-
-                <!-- Reverso: analogía (sin imagen) -->
-                <div class="flip-face flip-back">
-                  <div class="analogy-panel">
-                    <h4>Analogía: patios con rejas y puertas</h4>
-                    <p>Ahora la escuela tiene <strong>varios patios</strong>: fútbol (⚽), columpios (🎠) y lectura (📚).</p>
-                    <ul>
-                      <li><strong>Menos ruido cruzado:</strong> cada grupo oye lo suyo, no todo a la vez.</li>
-                      <li><strong>Menos choques:</strong> cada juego tiene su espacio; moverse es más fácil.</li>
-                      <li><strong>Aislamiento de problemas:</strong> si algo pasa en fútbol, los columpios siguen tranquilos.</li>
-                      <li><strong>Puertas con control:</strong> se pueden pasar “pelotas” o mensajes <em>sólo cuando hace falta</em>. 🚪👩‍🏫</li>
-                    </ul>
-                    <small>Vuelve a hacer clic para regresar.</small>
-                  </div>
-                </div>
-              </div>
             </div>
-          </div>
-          <!-- ===================================================== -->
-        </div>
-      </div>
-    `,
-    // ... el resto de tus templates
-  };
+            
+            <div class="content-section">
+                <h2 class="section-title">¿Qué es el Subnetting?</h2>
+                <p class="definition-text text-center">
+                    Subnetting es el proceso de tomar una red grande y dividirla en redes más pequeñas y manejables, llamadas <strong>subredes</strong>. Cada subred es como un barrio con su propio conjunto de direcciones, lo que hace que todo sea más organizado y eficiente.
+                </p>
+                <div class="image-gallery">
+                    <div class="image-card">
+                        <img src="assets/images/red_dividida.png" alt="Diagrama de una red principal dividida en subredes más pequeñas" />
+                        <div class="image-title">Diagrama de Subredes</div>
+                        <div class="image-description">
+                            Una red principal se ramifica en subredes para una gestión más eficiente.
+                        </div>
+                    </div>
+                </div>
+            </div>
 
-  // Handlers para el flip al click/teclado
-  function attachFlipHandlers(root = document) {
-    root.querySelectorAll("[data-flip] .flip-inner").forEach((inner) => {
-      const card = inner.closest("[data-flip]");
-      if (!card) return;
+            <div class="content-section">
+                <h2 class="section-title">¿Por qué es Importante?</h2>
+                <div class="benefits-list">
+                    <div class="benefit-item">
+                        <div class="benefit-title">📦 Mejor Organización</div>
+                        <div class="benefit-desc">
+                            Separa departamentos, áreas o tipos de dispositivos. Como organizar libros en una biblioteca.
+                        </div>
+                    </div>
+                    <div class="benefit-item">
+                        <div class="benefit-title">🛡️ Más Seguridad</div>
+                        <div class="benefit-desc">
+                            Si hay un problema en un barrio (subred), no afecta a toda la ciudad.
+                        </div>
+                    </div>
+                    <div class="benefit-item">
+                        <div class="benefit-title">🚀 Mayor Eficiencia</div>
+                        <div class="benefit-desc">
+                            El tráfico de datos es más rápido porque las "cartas" tienen menos camino que recorrer.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        `,
+    };
 
-      const toggle = () => {
-        const flipped = inner.classList.toggle("is-flipped");
-        card.setAttribute("aria-pressed", String(flipped));
-      };
+    function set(contentType = "definition") {
+        const main = document.getElementById("mainContent");
+        if (!main) return;
+        main.innerHTML = templates[contentType] || templates.definition;
+        main.scrollTo({ top: 0, behavior: "smooth" });
+    }
 
-      card.addEventListener("click", toggle);
-
-      card.addEventListener("keydown", (e) => {
-        if (e.key === "Enter" || e.key === " ") {
-          e.preventDefault();
-          toggle();
-        }
-      });
-    });
-  }
-
-  function set(contentType = "definition") {
-    const main = document.getElementById("mainContent");
-    if (!main) return;
-    main.innerHTML = templates[contentType] || templates.definition;
-    main.scrollTo({ top: 0, behavior: "smooth" });
-
-    // activar flip en nuevas tarjetas
-    attachFlipHandlers(main);
-  }
-
-  NetApp.content = { set };
+    NetApp.content = { set };
 })();

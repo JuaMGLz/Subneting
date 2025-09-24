@@ -4,194 +4,315 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Segmentación de Redes - Tipos</title>
+
+    <!-- SEO y accesibilidad -->
+    <title>División de Redes (Subnetting) - UAEMCITOS</title>
+    <meta name="description"
+        content="Guía paso a paso de subnetting para principiantes: aprende a dividir redes, calcular subredes, hosts y direcciones de manera sencilla.">
+    <meta name="author" content="UAEMCITOS">
+    <meta name="keywords" content="Subnetting, Redes, IP, Máscara de Subred, Guía, UAEMCITOS">
+
+    <!-- Favicon -->
+    <link rel="icon" href="../assets/img/favicon.png" type="image/png">
+
+    <!-- CSS globales (orden recomendado) -->
     <link rel="stylesheet" href="../assets/css/base.css">
     <link rel="stylesheet" href="../assets/css/theme.css">
-    <link rel="stylesheet" href="../assets/css/background.css">
-    <link rel="stylesheet" href="../assets/css/navbar.css">
-    <link rel="stylesheet" href="../assets/css/content.css">
     <link rel="stylesheet" href="../assets/css/components.css">
-    <link rel="stylesheet" href="../assets/css/content_tipos_segmentacion.css">
-    <link rel="preload" as="image" href="../assets/images/fisica.jpeg">
-    <link rel="preload" as="image" href="../assets/images/logica.jpeg">
-    <link rel="preload" as="image" href="../assets/images/microsegmentacion.jpeg">
+    <link rel="stylesheet" href="../assets/css/navbar.css">
+    <link rel="stylesheet" href="../assets/css/background.css">
+    <link rel="stylesheet" href="../assets/css/content.css">
+
+    <!-- CSS específico de esta página -->
+    <link rel="stylesheet" href="../assets/css/content_division.css">
 </head>
 
 <body>
     <div class="network-background" id="networkBg" aria-hidden="true"></div>
+
     <div class="dashboard" id="dashboardPage">
-        <nav class="navbar">
-            <div class="navbar-content">
-                <div class="logo" aria-label="UAEMCITOS">🌐 UAEMCITOS </div>
-                <div class="nav-menu" role="menubar">
-                    <div class="nav-item" role="none"><a class="nav-link" href="../definicion.html"
-                            role="menuitem">Definición</a></div>
-                    <div class="nav-item" role="none"><button class="nav-link" data-dropdown="concepts"
-                            aria-expanded="false" aria-controls="conceptsDropdown" role="menuitem">Conceptos <span
-                                class="caret">▼</span></button>
-                        <div class="dropdown" id="conceptsDropdown" hidden><a class="dropdown-item"
-                                href="tipos_segmentacion.html">Tipos de Segmentación</a><a class="dropdown-item"
-                                href="beneficios.html">Beneficios</a><a class="dropdown-item"
-                                href="implementacion.html">Implementación</a></div>
-                    </div>
-                    <div class="nav-item" role="none"><button class="nav-link" data-dropdown="tools"
-                            aria-expanded="false" aria-controls="toolsDropdown" role="menuitem">Herramientas <span
-                                class="caret">▼</span></button>
-                    <div class="dropdown" id="toolsDropdown" hidden>
-                            <a class="dropdown-item" href="/frontend/pages/division.html">División Visual de Subredes</a>
-                            <a class="dropdown-item" href="/frontend/pages/calculadora.html">Calculadora Inteligente de Subredes</a>
-                            <a class="dropdown-item" href="/frontend/pages/validacion.html">Sistema Adaptativo de Validación</a>
-                        </div>
-                </div>
-                <div class="user-menu"><span id="welcomeUser" class="welcome">Bienvenido, Usuario</span><button
-                        id="logoutBtn" class="logout-btn">Salir</button></div>
-            </div>
-        </nav>
+        <!-- El navbar será cargado automáticamente por el archivo JS -->
         <main class="main-content" id="mainContent" tabindex="-1">
-            <div class="content-section">
-                <h2 class="section-title">Tipos de Segmentación</h2>
-                <p class="definition-text">La segmentación de redes se implementa principalmente de tres formas:
-                    <strong>física</strong>,<strong>lógica (VLAN)</strong> y
-                    <strong>microsegmentación</strong>.<em></em> <em></em></p>
-                <div class="image-gallery">
-                    <article class="image-card">
-                        <div class="flip-card" data-flip role="button" tabindex="0"
-                            aria-label="Ver analogía de Segmentación Física" aria-pressed="false">
-                            <div class="flip-inner">
-                                <div class="flip-face flip-front" aria-hidden="false"><img
-                                        src="../assets/images/fisica.jpeg"></div>
-                                <div class="flip-face flip-back" aria-hidden="true">
-                                    <div class="analogy-panel">
-                                        <h4>Analogía: Oficinas con muros</h4>
-                                        <p>Cada departamento está en una <strong>oficina distinta</strong>, con muros
-                                            ycableado propio.Si pasa algo en una oficina, las demás <strong>no se
-                                                afectan</strong>.</p>
-                                        <ul>
-                                            <li><strong>Aislamiento total</strong> por separación física.</li>
-                                            <li><strong>Rígido y costoso</strong> de cambiar.</li>
-                                        </ul>
+            <div class="tutorial-container">
+                <header class="tutorial-header">
+                    <h1 class="tutorial-title">División de Redes (Subnetting) para Principiantes</h1>
+                    <p class="tutorial-subtitle">
+                        Aprende a dividir una red grande en redes más pequeñas de forma manual y sencilla. ¡Sin
+                        programas, solo con tu cerebro!
+                    </p>
+                </header>
+
+                <section>
+                    <h2 class="section-title">¿Qué es una dirección IP?</h2>
+                    <div class="intro-text">
+                        Una dirección IP es como la dirección de tu casa, pero para un dispositivo en una red. Se
+                        compone de 4 números del 0 al 255, separados por puntos.
+                        Ejemplo: <span class="highlight">192.168.10.15</span>
+                    </div>
+                    <div class="intro-text">
+                        La dirección IP se divide en dos partes:
+                    </div>
+                    <ul class="concept-list">
+                        <li><span class="highlight">Parte de Red:</span> Es como el nombre de la calle. Es la misma para
+                            todos los dispositivos en la misma red.</li>
+                        <li><span class="highlight">Parte de Host:</span> Es como el número de la casa. Es única para
+                            cada dispositivo en esa red.</li>
+                    </ul>
+                </section>
+
+                <section>
+                    <h2 class="section-title">Conceptos Clave que Necesitas Saber</h2>
+                    <div class="concepts-grid">
+                        <div class="concept-card">
+                            <h3 class="concept-title">Máscara de Subred</h3>
+                            <p class="concept-description">
+                                Es la herramienta que te dice qué parte de la IP es la "Parte de Red" y qué parte es la
+                                "Parte de Host". Se compone de una serie de unos seguidos de ceros.
+                            </p>
+                        </div>
+                        <div class="concept-card">
+                            <h3 class="concept-title">Subred (Subnet)</h3>
+                            <p class="concept-description">
+                                Es una red más pequeña que se crea a partir de una red principal más grande. Esto ayuda
+                                a organizar y gestionar la red de forma más eficiente.
+                            </p>
+                        </div>
+                        <div class="concept-card">
+                            <h3 class="concept-title">Host</h3>
+                            <p class="concept-description">
+                                Cualquier dispositivo que se conecta a una red, como una computadora, un teléfono o una
+                                impresora.
+                            </p>
+                        </div>
+                        <div class="concept-card">
+                            <h3 class="concept-title">Dirección de Red</h3>
+                            <p class="concept-description">
+                                Es la primera dirección en una subred. Sirve para identificar la red en su totalidad y
+                                no se puede asignar a ningún dispositivo (host).
+                            </p>
+                        </div>
+                        <div class="concept-card">
+                            <h3 class="concept-title">Dirección de Broadcast</h3>
+                            <p class="concept-description">
+                                Es la última dirección en una subred. Se usa para enviar un mensaje a todos los
+                                dispositivos que están en esa subred al mismo tiempo. No se puede asignar a un host.
+                            </p>
+                        </div>
+                    </div>
+                </section>
+
+                <section>
+                    <h2 class="section-title">Paso a Paso: El Método Manual</h2>
+                    <div class="intro-text">
+                        Vamos a usar un ejemplo: queremos dividir la red <span class="highlight">192.168.1.0</span> con
+                        una máscara de subred <span class="highlight">255.255.255.0</span> en 4 subredes más pequeñas.
+                    </div>
+
+                    <div class="steps-container">
+                        <div class="step-card">
+                            <div class="step-number">1</div>
+                            <div class="step-content">
+                                <h3 class="step-title">Conviértelo a Binario</h3>
+                                <p class="step-text">
+                                    Para hacer los cálculos, necesitamos convertir la máscara de subred (255.255.255.0)
+                                    a binario (ceros y unos). Cada 255 es un octeto (8 bits) lleno de unos, y el 0 son 8
+                                    ceros.
+                                </p>
+                                <div class="code-box">
+                                    255.255.255.0 <br>
+                                    <span class="code-highlight">11111111.11111111.11111111</span>.00000000
+                                </div>
+                                <p class="step-text">
+                                    Contamos los unos, lo que nos da el <span class="highlight">CIDR</span>. En este
+                                    caso, hay 24 unos, así que es un /24.
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="step-card">
+                            <div class="step-number">2</div>
+                            <div class="step-content">
+                                <h3 class="step-title">Calcula la cantidad de Subredes</h3>
+                                <p class="step-text">
+                                    La fórmula es <strong>2<sup>n</sup></strong>, donde 'n' es el número de bits que
+                                    vamos a "tomar prestados" de la parte de Host. Necesitamos 4 subredes, así que
+                                    buscamos la potencia de 2 que sea igual o mayor a 4.
+                                </p>
+                                <div class="code-box">
+                                    2^1 = 2 (No alcanza)<br>
+                                    <span class="code-highlight">2^2 = 4</span> (¡Exacto!)
+                                </div>
+                                <p class="step-text">
+                                    Necesitamos <span class="highlight">2 bits</span> prestados.
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="step-card">
+                            <div class="step-number">3</div>
+                            <div class="step-content">
+                                <h3 class="step-title">Calcula la cantidad de Hosts</h3>
+                                <p class="step-text">
+                                    Ahora, la fórmula es <strong>2<sup>h</sup> - 2</strong>, donde 'h' es el número de
+                                    bits restantes en la parte de Host. Nuestra máscara original tenía 8 bits de Host, y
+                                    prestamos 2, así que nos quedan 6.
+                                </p>
+                                <div class="code-box">
+                                    8 - 2 = 6 bits restantes<br>
+                                    2^6 - 2 = 64 - 2 = <span class="code-highlight">62 hosts por subred</span>
+                                </div>
+                                <p class="step-text">
+                                    El '- 2' es porque una dirección se usa para la red y otra para el broadcast
+                                    (mensaje a todos los hosts).
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="step-card">
+                            <div class="step-number">4</div>
+                            <div class="step-content">
+                                <h3 class="step-title">Calcula el Salto de Red</h3>
+                                <p class="step-text">
+                                    Para encontrar la dirección de la primera subred, sumamos un número mágico a nuestra
+                                    dirección original. Este número se llama "salto" y se calcula con la fórmula
+                                    <strong>256 - Máscara Nueva</strong>.
+                                </p>
+                                <p class="step-text">
+                                    Primero, calculamos la Máscara Nueva. La parte de Red tiene 24 unos, y le sumamos
+                                    los 2 que prestamos. Son 26 unos. Para saber qué número es, sumamos los valores de
+                                    los bits que están en "1".
+                                </p>
+                                <div class="code-box">
+                                    <span class="code-highlight">11111111.11111111.11111111.</span><span
+                                        class="code-red">11</span>000000 <br>
+                                    Máscara anterior: 255.255.255.<span class="code-red">0</span> <br>
+                                    Valores: 128 + 64 = 192 <br>
+                                    Máscara nueva: 255.255.255.<span class="code-highlight">192</span>
+                                </div>
+                                <div class="code-box">
+                                    Salto = 256 - 192 = <span class="code-highlight">64</span>
+                                </div>
+                                <p class="step-text">
+                                    Este es el "salto". Cada subred comenzará a 64 números de la anterior.
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="step-card">
+                            <div class="step-number">5</div>
+                            <div class="step-content">
+                                <h3 class="step-title">Encuentra las direcciones de cada Subred</h3>
+                                <p class="step-text">
+                                    Usando el salto (64), podemos encontrar las direcciones de red, broadcast y el rango
+                                    de hosts utilizables para cada subred.
+                                </p>
+                                <div class="subnets-grid">
+                                    <div class="subnet-info">
+                                        <div class="code-box">
+                                            <span class="code-highlight">Subred 1:</span> <br>
+                                            Dirección de Red: 192.168.1.<span class="code-bold">0</span> <br>
+                                            Primer Host: 192.168.1.<span class="code-bold">1</span> <br>
+                                            Último Host: 192.168.1.<span class="code-bold">62</span> <br>
+                                            Dirección de Broadcast: 192.168.1.<span class="code-bold">63</span>
+                                        </div>
+                                    </div>
+                                    <div class="subnet-info">
+                                        <div class="code-box">
+                                            <span class="code-highlight">Subred 2:</span> (Sumamos el salto: 0 + 64)
+                                            <br>
+                                            Dirección de Red: 192.168.1.<span class="code-bold">64</span> <br>
+                                            Primer Host: 192.168.1.<span class="code-bold">65</span> <br>
+                                            Último Host: 192.168.1.<span class="code-bold">126</span> <br>
+                                            Dirección de Broadcast: 192.168.1.<span class="code-bold">127</span>
+                                        </div>
+                                    </div>
+                                    <div class="subnet-info">
+                                        <div class="code-box">
+                                            <span class="code-highlight">Subred 3:</span> (Sumamos el salto: 64 + 64)
+                                            <br>
+                                            Dirección de Red: 192.168.1.<span class="code-bold">128</span> <br>
+                                            Primer Host: 192.168.1.<span class="code-bold">129</span> <br>
+                                            Último Host: 192.168.1.<span class="code-bold">190</span> <br>
+                                            Dirección de Broadcast: 192.168.1.<span class="code-bold">191</span>
+                                        </div>
+                                    </div>
+                                    <div class="subnet-info">
+                                        <div class="code-box">
+                                            <span class="code-highlight">Subred 4:</span> (Sumamos el salto: 128 + 64)
+                                            <br>
+                                            Dirección de Red: 192.168.1.<span class="code-bold">192</span> <br>
+                                            Primer Host: 192.168.1.<span class="code-bold">193</span> <br>
+                                            Último Host: 192.168.1.<span class="code-bold">254</span> <br>
+                                            Dirección de Broadcast: 192.168.1.<span class="code-bold">255</span>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        <h3 class="image-title">Segmentación Física</h3>
-                        <div class="definition-block">
-                            <h4>Definición</h4>
-                            <p>Divide la red a nivel de <strong>Capa 2/3</strong> usando <strong>VLANs</strong>
-                                ycontrola el tráfico entre segmentoscon enrutamiento/ACL/Firewall, reutilizando la misma
-                                infraestructura física.</p>
-                            <h4>Analogía</h4>
-                            <p>Es como una <strong>gran caja</strong> con <strong>separadores de colores</strong>
-                                yetiquetas.Todos los juguetes están en la misma caja, pero <strong>cada color es su
-                                    propiogrupo</strong>.</p>
-                            <ul class="list-compact">
-                                <li>Cada separador de color es una “VLAN”.</li>
-                                <li>Si cambias la <strong>etiqueta</strong> de un juguete, lo pasas a otro grupo
-                                    sincambiar de caja.</li>
-                                <li>Para que dos grupos se hablen, un adulto abre una <strong>puerta</strong>
-                                    especial(el “firewall/router”).</li>
-                            </ul>
+                    </div>
+                </section>
+
+                <section>
+                    <h2 class="section-title">Resumen de los Pasos Sencillos</h2>
+                    <div class="summary-grid">
+                        <div class="summary-card">
+                            <h3 class="summary-title">Paso 1: Binario</h3>
+                            <p class="summary-text">Convierte la máscara de subred a binario para encontrar los unos.
+                            </p>
                         </div>
-                    </article>
-                    <article class="image-card">
-                        <div class="flip-card" data-flip role="button" tabindex="0"
-                            aria-label="Ver analogía de Segmentación Lógica (VLAN)" aria-pressed="false">
-                            <div class="flip-inner">
-                                <div class="flip-face flip-front" aria-hidden="false"><img
-                                        src="../assets/images/logica.jpeg"></div>
-                                <div class="flip-face flip-back" aria-hidden="true">
-                                    <div class="analogy-panel">
-                                        <h4>Analogía: Edificio con tarjetas de acceso</h4>
-                                        <p>Un solo edificio y cableado, pero <strong>accesos controlados</strong>
-                                            portarjeta.Puedes cambiar permisos sin reconstruir nada.</p>
-                                        <ul>
-                                            <li><strong>Flexible</strong> y eficiente en costos.</li>
-                                            <li>Requiere <strong>configuración correcta</strong> (VLAN, ACL,
-                                                inter-VLANen firewall).</li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
+                        <div class="summary-card">
+                            <h3 class="summary-title">Paso 2: Subredes</h3>
+                            <p class="summary-text">Usa la fórmula 2<sup>n</sup> para saber cuántos bits "prestar" (n)
+                                para obtener el número de subredes que necesitas.</p>
                         </div>
-                        <h3 class="image-title">Segmentación Lógica (VLAN)</h3>
-                        <div class="definition-block">
-                            <h4>Definición</h4>
-                            <p>Aplica <strong>políticas a nivel de carga de trabajo</strong> (host, VM,
-                                contenedor)mediante agentes o SDN,siguiendo <em>Zero Trust</em>: solo se permite lo
-                                necesario.</p>
-                            <h4>Analogía para niños</h4>
-                            <p>Imagina que <strong>cada juguete</strong> tiene su propio <strong>walkie-talkie</strong>y
-                                una lista de amigos.Solo puede hablar con quienes están en su lista.</p>
-                            <ul class="list-compact">
-                                <li>Cada juguete tiene <strong>reglas personales</strong> de con quién puede hablar.
-                                </li>
-                                <li>Si un juguete se “porta mal”, <strong>no molesta</strong> a los demás porque nopuede
-                                    hablarles.</li>
-                                <li>Las conversaciones son <strong>a la medida</strong> de cada juguete.</li>
-                            </ul>
+                        <div class="summary-card">
+                            <h3 class="summary-title">Paso 3: Hosts</h3>
+                            <p class="summary-text">Usa la fórmula 2<sup>h</sup> - 2 para saber cuántos hosts (h) caben
+                                en cada subred.</p>
                         </div>
-                    </article>
-                    <article class="image-card">
-                        <div class="flip-card" data-flip role="button" tabindex="0"
-                            aria-label="Ver analogía de Micro-segmentación" aria-pressed="false">
-                            <div class="flip-inner">
-                                <div class="flip-face flip-front" aria-hidden="false"><img
-                                        src="../assets/images/microsegmentacion.jpeg"></div>
-                                <div class="flip-face flip-back" aria-hidden="true">
-                                    <div class="analogy-panel">
-                                        <h4>Analogía: Guardias por persona</h4>
-                                        <p>Cada dispositivo/servicio tiene un <strong>guardia personal</strong>
-                                            quedecide con quién puede hablar y qué puede hacer.Si uno se infecta, el
-                                            resto <strong>no queda expuesto</strong>.</p>
-                                        <ul>
-                                            <li><strong>Control granular</strong> por aplicación/host.</li>
-                                            <li>Mayor <strong>complejidad</strong> y necesidad devisibilidad/telemetría.
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
+                        <div class="summary-card">
+                            <h3 class="summary-title">Paso 4: Salto</h3>
+                            <p class="summary-text">Calcula el salto con la fórmula 256 - Máscara Nueva para encontrar
+                                los puntos de inicio de cada subred.</p>
                         </div>
-                        <h3 class="image-title">Micro-segmentación</h3>
-                        <div class="definition-block">
-                            <h4>Definición</h4>
-                            <p>Consiste en separar la red con <strong>hardware y cableado
-                                    independientes</strong>(switches/routers dedicados, enlaces propios). Ofrece el
-                                mayor aislamiento entredominios.</p>
-                            <h4>Analogía</h4>
-                            <p>Imagina que tienes <strong>tres cajas de juguetes</strong>, cada una en
-                                cuartosdistintos.Los juguetes de una caja <strong>no se mezclan</strong> con los de las
-                                otras.</p>
-                            <ul class="list-compact">
-                                <li>Cada caja es como una “mini red” aparte.</li>
-                                <li>Si se derrama jugo en una caja, <strong>las otras no se manchan</strong>.</li>
-                                <li>Para usar un juguete de otra caja hay que <strong>cambiar de cuarto</strong>.</li>
-                            </ul>
+                        <div class="summary-card">
+                            <h3 class="summary-title">Paso 5: Direcciones</h3>
+                            <p class="summary-text">Usa el salto para encontrar las direcciones de red, broadcast y el
+                                rango de hosts de cada subred.</p>
                         </div>
-                    </article>
-                </div>
+                    </div>
+                </section>
             </div>
         </main>
     </div>
+
     <div class="modal" id="appModal" hidden aria-hidden="true" role="dialog" aria-modal="true"
         aria-labelledby="modalTitle">
         <div class="modal-backdrop" data-modal-close></div>
         <div class="modal-dialog" role="document">
             <header class="modal-header">
-                <h3 id="modalTitle">Título del modal</h3><button class="modal-close" data-modal-close
-                    aria-label="Cerrar">✕</button>
+                <h3 id="modalTitle">Título del modal</h3>
+                <button class="modal-close" data-modal-close aria-label="Cerrar">✕</button>
             </header>
             <div class="modal-body" id="modalBody">Contenido del modal...</div>
-            <footer class="modal-footer"><button class="btn" data-modal-close>Cerrar</button></footer>
+            <footer class="modal-footer">
+                <button class="btn" data-modal-close>Cerrar</button>
+            </footer>
         </div>
     </div>
+
+    <!-- JS globales del sitio -->
     <script src="../assets/js/background.js" defer></script>
     <script src="../assets/js/effects.js" defer></script>
-    <script src="../assets/js/nav.js" defer></script>
     <script src="../assets/js/auth.js" defer></script>
     <script src="../assets/js/modal.js" defer></script>
     <script src="../assets/js/app.js" defer></script>
-    <script src="../assets/js/tipos_segmentacion.js" defer></script>
+
+    <!-- JS específico -->
+    <script src="../assets/js/division.js" defer></script>
+
+    <!-- Importante: el script del navbar debe ir al final para asegurarse de que el DOM esté cargado -->
+    <script src="../assets/js/navbar.js" defer></script>
 </body>
 
 </html>

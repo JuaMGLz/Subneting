@@ -6,6 +6,18 @@
 .image-gallery {
   grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
 }
+.tutorial-container {
+    /* **Regla modificada** para que coincida con .main-content */
+    width: 90%;
+    max-width: 1400px;
+    margin: 2rem auto;
+    padding: 2rem;
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(20px);
+    border-radius: 24px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+}
 
 .image-card {
   position: relative;
@@ -177,4 +189,10 @@
   .flip-inner {
     height: 280px;
   }
+}
+.main-content {
+    width: 90%;
+    max-width: 1400px;
+    margin: 0 auto;
+    /* ... otros estilos ... */
 }

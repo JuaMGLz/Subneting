@@ -1,8 +1,9 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>División Visual de Subredes</title>
 
   <!-- Orden recomendado -->
@@ -23,40 +24,41 @@
 </head>
 
 <body>
-  <!-- Fondo animado reutilizando tu sistema -->
   <div class="network-background" id="networkBg" aria-hidden="true"></div>
 
   <div class="dashboard" id="dashboardPage">
-    <!-- NAVBAR (misma estructura que ya usas) -->
     <nav class="navbar">
       <div class="navbar-content">
         <div class="logo" aria-label="UAEMCITOS">🌐 UAEMCITOS</div>
 
         <div class="nav-menu" role="menubar">
           <div class="nav-item" role="none">
-            <a class="nav-link" href="../definicion.html" role="menuitem">Definición</a>
+            <a class="nav-link" href="definicion.html" role="menuitem">Definición</a>
           </div>
 
           <div class="nav-item" role="none">
-            <button class="nav-link" data-dropdown="concepts" aria-expanded="false" aria-controls="conceptsDropdown" role="menuitem">
-              Conceptos <span class="caret">▼</span>
+            <button class="nav-link" data-dropdown="concepts" aria-expanded="false" aria-controls="conceptsDropdown"
+              role="menuitem">
+              Metodos de creación <span class="caret">▼</span>
             </button>
             <div class="dropdown" id="conceptsDropdown" hidden>
-              <a class="dropdown-item" href="./tipos_segmentacion.html">Tipos de Segmentación</a>
-              <a class="dropdown-item" href="./beneficios.html">Beneficios</a>
-              <a class="dropdown-item" href="./implementacion.html">Implementación</a>
+              <a class="dropdown-item" href="pages/tipos_segmentacion.html">Conversión a binario</a>
+              <a class="dropdown-item" href="pages/beneficios.html">Beneficios</a>
+              <a class="dropdown-item" href="pages/implementacion.html">Implementación</a>
             </div>
           </div>
 
           <div class="nav-item" role="none">
-            <button class="nav-link" data-dropdown="tools" aria-expanded="false" aria-controls="toolsDropdown" role="menuitem">
+            <button class="nav-link" data-dropdown="tools" aria-expanded="false" aria-controls="toolsDropdown"
+              role="menuitem">
               Herramientas <span class="caret">▼</span>
             </button>
-<div class="dropdown" id="toolsDropdown" hidden>
-                            <a class="dropdown-item" href="/frontend/pages/division.html">División Visual de Subredes</a>
-                            <a class="dropdown-item" href="/frontend/pages/calculadora.html">Calculadora Inteligente de Subredes</a>
-                            <a class="dropdown-item" href="/frontend/pages/validacion.html">Sistema Adaptativo de Validación</a>
-                        </div>
+            <div class="dropdown" id="toolsDropdown" hidden>
+              <a class="dropdown-item" href="pages/division.html">División Visual de Subredes</a>
+              <a class="dropdown-item" href="pages/calculadora.html">Calculadora Inteligente de
+                Subredes</a>
+              <a class="dropdown-item" href="pages/validacion.html">Sistema Adaptativo de Validación</a>
+            </div>
           </div>
         </div>
 
@@ -71,7 +73,8 @@
     <main class="main-content" id="mainContent" tabindex="-1">
       <section class="content-section">
         <h2 class="section-title">🎨 División Visual de Subredes</h2>
-        <p class="definition-text">Arrastra dispositivos al área de red para crear tu topología y visualizar subredes.</p>
+        <p class="definition-text">Arrastra dispositivos al área de red para crear tu topología y visualizar subredes.
+        </p>
 
         <!-- Notificaciones (toasts) -->
         <div class="toast-container" id="toastContainer" aria-live="polite" aria-atomic="true"></div>
@@ -91,9 +94,12 @@
             <p class="muted">Arrastra al área de red</p>
 
             <div class="v-stack gap-sm" id="devicePalette">
-              <button class="chip chip-success device-item" draggable="true" data-type="host" title="Host - Dispositivo final de red">HOST</button>
-              <button class="chip chip-info device-item" draggable="true" data-type="router" title="Router - Conecta diferentes redes">ROUTER</button>
-              <button class="chip chip-warning device-item" draggable="true" data-type="switch" title="Switch - Conecta dispositivos en la misma red">SWITCH</button>
+              <button class="chip chip-success device-item" draggable="true" data-type="host"
+                title="Host - Dispositivo final de red">HOST</button>
+              <button class="chip chip-info device-item" draggable="true" data-type="router"
+                title="Router - Conecta diferentes redes">ROUTER</button>
+              <button class="chip chip-warning device-item" draggable="true" data-type="switch"
+                title="Switch - Conecta dispositivos en la misma red">SWITCH</button>
             </div>
 
             <h3 class="subtitle mt-md">Controles</h3>
@@ -115,7 +121,8 @@
   </div>
 
   <!-- Modal genérico (si lo usas en más páginas) -->
-  <div class="modal" id="appModal" hidden aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+  <div class="modal" id="appModal" hidden aria-hidden="true" role="dialog" aria-modal="true"
+    aria-labelledby="modalTitle">
     <div class="modal-backdrop" data-modal-close></div>
     <div class="modal-dialog" role="document">
       <header class="modal-header">
@@ -140,4 +147,5 @@
   <!-- JS específico de esta página (nuevo) -->
   <script src="../assets/js/subredes.js" defer></script>
 </body>
+
 </html>

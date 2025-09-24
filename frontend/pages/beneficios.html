@@ -4,162 +4,227 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Segmentación de Redes - Beneficios</title>
+    <title>Subneteo - UAEMCITOS</title>
 
-    <!-- CSS global del proyecto -->
-    <link rel="stylesheet" href="../assets/css/base.css" />
-    <link rel="stylesheet" href="../assets/css/theme.css" />
-    <link rel="stylesheet" href="../assets/css/background.css" />
-    <link rel="stylesheet" href="../assets/css/navbar.css" />
-    <link rel="stylesheet" href="../assets/css/content.css" />
-    <link rel="stylesheet" href="../assets/css/components.css" />
+    <!-- CSS globales (orden recomendado) -->
+    <link rel="stylesheet" href="../assets/css/theme.css">
+    <link rel="stylesheet" href="../assets/css/base.css">
+    <link rel="stylesheet" href="../assets/css/components.css">
+    <link rel="stylesheet" href="../assets/css/navbar.css">
+    <link rel="stylesheet" href="../assets/css/background.css">
+    <link rel="stylesheet" href="../assets/css/content.css">
 
     <!-- CSS específico de esta página -->
-    <link rel="stylesheet" href="../assets/css/content_beneficios.css" />
+    <link rel="stylesheet" href="../assets/css/content_division.css">
+    <link rel="stylesheet" href="../assets/css/content_subredes.css">
 </head>
 
 <body>
-    <!-- Fondo animado -->
     <div class="network-background" id="networkBg" aria-hidden="true"></div>
 
     <div class="dashboard" id="dashboardPage">
-        <!-- NAV -->
-        <nav class="navbar">
-            <div class="navbar-content">
-                <div class="logo" aria-label="NetSegment Pro">🌐 UAEMCITOS</div>
+        <!-- El navbar será cargado automáticamente por el archivo JS -->
 
-                <div class="nav-menu" role="menubar">
-                    <div class="nav-item" role="none">
-                        <!-- OJO: si tu definicion.html está en esta misma carpeta /pages/, usa ruta relativa simple -->
-                        <a class="nav-link" href="/definicion.html">Definición</a>
-                    </div>
+        <main class="main-content" id="mainContent" tabindex="-1">
+            <div class="tutorial-container">
+                <header class="tutorial-header">
+                    <h1 class="tutorial-title">Subneteo Explicado: Método Intermedio</h1>
+                    <p class="tutorial-subtitle">
+                        Método de potencia de 2 para dividir redes
+                    </p>
+                </header>
 
-                    <div class="nav-item" role="none">
-                        <button class="nav-link" data-dropdown="concepts" aria-expanded="false"
-                            aria-controls="conceptsDropdown" role="menuitem">
-                            Conceptos <span class="caret">▼</span>
-                        </button>
-                        <div class="dropdown" id="conceptsDropdown" hidden>
-                            <a class="dropdown-item" href="tipos_segmentacion.html">Tipos de Segmentación</a>
-                            <a class="dropdown-item" href="beneficios.html" aria-current="page">Beneficios</a>
-                            <a class="dropdown-item" href="implementacion.html">Implementación</a>
-                        </div>
-                    </div>
+                <section class="section-concepts">
+                    <h2 class="section-title">Conceptos Fundamentales Antes de Empezar</h2>
+                    <ul class="intro-text">
+                        <li>
+                            <span class="highlight">Dirección IP:</span> Es como el DNI de un dispositivo en una red.
+                        </li>
+                        <li>
+                            <span class="highlight">Máscara de Subred:</span> Define qué parte de la IP es la red y cuál
+                            es el dispositivo.
+                        </li>
+                        <li>
+                            <span class="highlight">Bits de Red (1s) vs. Bits de Host (0s):</span> En la máscara, los 1s
+                            indican la parte de red y los 0s la parte de host.
+                        </li>
+                    </ul>
+                </section>
 
-                    <div class="nav-item" role="none">
-                        <button class="nav-link" data-dropdown="tools" aria-expanded="false"
-                            aria-controls="toolsDropdown" role="menuitem">
-                            Herramientas <span class="caret">▼</span>
-                        </button>
-                        <div class="dropdown" id="toolsDropdown" hidden>
-                            <a class="dropdown-item" href="/frontend/pages/division.html">División Visual de Subredes</a>
-                            <a class="dropdown-item" href="/frontend/pages/calculadora.html">Calculadora Inteligente de Subredes</a>
-                            <a class="dropdown-item" href="/frontend/pages/validacion.html">Sistema Adaptativo de Validación</a>
+
+                <div class="step-card">
+                    <div class="step-number">1</div>
+                    <div class="step-content">
+                        <h3 class="step-title">Paso 1: Entiende la Tabla Mágica del 2</h3>
+                        <p class="step-text">
+                            La clave del subneteo es esta tabla. Cada número es una potencia de 2. Úsala para saber
+                            cuántas redes y hosts puedes crear.
+                        </p>
+                        <div class="binary-table">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>Potencia de 2</th>
+                                        <th><strong>2<sup>7</sup></strong></th>
+                                        <th><strong>2<sup>6</sup></strong></th>
+                                        <th><strong>2<sup>5</sup></strong></th>
+                                        <th><strong>2<sup>4</sup></strong></th>
+                                        <th><strong>2<sup>3</sup></strong></th>
+                                        <th><strong>2<sup>2</sup></strong></th>
+                                        <th><strong>2<sup>1</sup></strong></th>
+                                        <th><strong>2<sup>0</sup></strong></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>Valor</td>
+                                        <td>128</td>
+                                        <td>64</td>
+                                        <td>32</td>
+                                        <td>16</td>
+                                        <td>8</td>
+                                        <td>4</td>
+                                        <td>2</td>
+                                        <td>1</td>
+                                    </tr>
+                                </tbody>
+                            </table>
                         </div>
                     </div>
                 </div>
 
-                <div class="user-menu">
-                    <span id="welcomeUser" class="welcome">Bienvenido, Usuario</span>
-                    <button id="logoutBtn" class="logout-btn">Salir</button>
+                <div class="step-card">
+                    <div class="step-number">2</div>
+                    <div class="step-content">
+                        <h3 class="step-title">Paso 2: ¿Cuántas redes o hosts necesitas?</h3>
+                        <p class="step-text">
+                            Aquí es donde aplicas la tabla. La pregunta clave es: ¿Qué potencia de 2 es igual o mayor al
+                            número de redes o hosts que necesitas?
+                        </p>
+                        <div class="intro-text alert-box">
+                            <strong>Ejemplo:</strong> Si necesitas <span class="highlight">5 redes</span>, buscas en la
+                            tabla.
+                            <strong>2<sup>2</sup></strong> es 4 (muy poco). Entonces, eliges
+                            <strong>2<sup>3</sup></strong>, que es 8.
+                            Necesitas <span class="highlight">3 bits</span> para las subredes.
+                        </div>
+                    </div>
+                </div>
+
+                <div class="step-card">
+                    <div class="step-number">3</div>
+                    <div class="step-content">
+                        <h3 class="step-title">Paso 3: Define la Máscara de Subred</h3>
+                        <p class="step-text">
+                            Añade los bits que elegiste en el paso anterior a la máscara de subred original. Recuerda
+                            que los bits de subred "extra" se cuentan desde la izquierda.
+                        </p>
+                        <div class="binary-table code-box">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>Máscara</th>
+                                        <th>128</th>
+                                        <th>64</th>
+                                        <th>32</th>
+                                        <th>16</th>
+                                        <th>8</th>
+                                        <th>4</th>
+                                        <th>2</th>
+                                        <th>1</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>Binario</td>
+                                        <td>1</td>
+                                        <td>1</td>
+                                        <td>1</td>
+                                        <td class="highlight-binary">1</td>
+                                        <td class="highlight-binary">1</td>
+                                        <td class="highlight-binary">1</td>
+                                        <td>0</td>
+                                        <td>0</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <p class="step-text text-sm">
+                            Si tu máscara era /24 y tomas 3 bits, la nueva máscara es /27. Suma los valores de los bits
+                            que has tomado para obtener el valor del
+                            octeto. En este caso: 128 + 64 + 32 = <span class="highlight">224</span>.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="step-card">
+                    <div class="step-number">4</div>
+                    <div class="step-content">
+                        <h3 class="step-title">Paso 4: Calcula el Salto (Incremento)</h3>
+                        <p class="step-text">
+                            El salto es el valor del último bit de subred que "encendiste" o "tomaste" para tu nueva
+                            máscara. Este valor te dice de cuánto en cuánto
+                            irán las subredes.
+                        </p>
+                        <div class="intro-text alert-box purple-alert">
+                            <strong>Ejemplo:</strong> En nuestro caso, tomamos 3 bits y el último bit que encendimos es
+                            el de valor 32. El salto es
+                            <span class="highlight">32</span>.
+                        </div>
+                    </div>
+                </div>
+
+                <div class="step-card">
+                    <div class="step-number">5</div>
+                    <div class="step-content">
+                        <h3 class="step-title">Paso 5: Enumera las Subredes</h3>
+                        <p class="step-text">
+                            Empieza con el número de red original y suma el salto en cada paso para encontrar la
+                            siguiente red.
+                        </p>
+                        <ul class="concept-list">
+                            <li><span class="highlight">Red 1:</span> 192.168.1.0 (original)</li>
+                            <li><span class="highlight">Red 2:</span> 192.168.1.32 (0 + 32)</li>
+                            <li><span class="highlight">Red 3:</span> 192.168.1.64 (32 + 32)</li>
+                            <li>... y así sucesivamente, sumando 32.</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <section class="section-summary">
+                    <h2 class="section-title">Resumen de los Pasos</h2>
+                    <ol class="concept-list">
+                        <li>
+                            <strong>Paso 1:</strong> Identifica la <span class="highlight">Tabla de potencias de
+                                2</span>.
+                        </li>
+                        <li>
+                            <strong>Paso 2:</strong> Determina los <span class="highlight">bits a tomar</span> y los
+                            <span class="highlight">hosts disponibles</span>.
+                        </li>
+                        <li>
+                            <strong>Paso 3:</strong> Suma los valores de los bits tomados para la nueva <span
+                                class="highlight">Máscara de Subred</span>.
+                        </li>
+                        <li>
+                            <strong>Paso 4:</strong> Encuentra el <span class="highlight">Salto</span> (incremento).
+                        </li>
+                        <li>
+                            <strong>Paso 5:</strong> Enumera las <span class="highlight">direcciones de subred</span>
+                            sumando el salto.
+                        </li>
+                    </ol>
+                </section>
+
+                <div class="summary-text text-center mt-8">
+                    <p class="font-semibold">
+                        ¡Y listo! Con estos pasos, puedes dividir redes a mano de forma sencilla.
+                    </p>
                 </div>
             </div>
-        </nav>
-
-        <!-- CONTENIDO -->
-        <main class="main-content" id="mainContent" tabindex="-1">
-            <section class="content-section benefits-hero">
-                <h2 class="section-title">Beneficios de la Segmentación</h2>
-                <p class="definition-text benefits-intro">
-                    Implementar segmentación en la red mejora la <strong>seguridad</strong>, la
-                    <strong>visibilidad</strong> y el
-                    <strong>rendimiento</strong>, además de facilitar el <strong>cumplimiento</strong> normativo.
-                    Abajo verás los beneficios clave. Haz clic en cada tarjeta para ver detalles.
-                </p>
-
-                <div class="benefit-grid" id="benefitGrid">
-                    <!-- 1 -->
-                    <article class="benefit-card" data-toggle="benefit">
-                        <header class="benefit-header">
-                            <span class="emoji-badge" role="img" aria-label="Escudo">🛡️</span>
-                            <h3 class="benefit-title">Contención de Amenazas</h3>
-                        </header>
-                        <p class="benefit-text">
-                            Si ocurre una intrusión, el atacante queda <strong>confinado</strong> al segmento afectado.
-                        </p>
-                        <div class="benefit-details" hidden>
-                            <ul>
-                                <li>Reduce el <em>movimiento lateral</em> del atacante entre zonas.</li>
-                                <li>Limita el alcance de malware y ransomware.</li>
-                                <li>Facilita el aislamiento rápido durante incidentes.</li>
-                            </ul>
-                        </div>
-                        <button class="benefit-toggle" aria-expanded="false" aria-label="Ver más">Ver más</button>
-                    </article>
-
-                    <!-- 2 -->
-                    <article class="benefit-card" data-toggle="benefit">
-                        <header class="benefit-header">
-                            <span class="emoji-badge" role="img" aria-label="Lupa">🔍</span>
-                            <h3 class="benefit-title">Mejor Visibilidad</h3>
-                        </header>
-                        <p class="benefit-text">
-                            Permite monitorear y registrar el tráfico <strong>por segmento</strong> con mayor claridad.
-                        </p>
-                        <div class="benefit-details" hidden>
-                            <ul>
-                                <li>Métricas enfocadas por zona (DMZ, LAN, IoT, invitados, etc.).</li>
-                                <li>Alertas y trazabilidad más precisas.</li>
-                                <li>Auditorías y reportes simplificados.</li>
-                            </ul>
-                        </div>
-                        <button class="benefit-toggle" aria-expanded="false" aria-label="Ver más">Ver más</button>
-                    </article>
-
-                    <!-- 3 -->
-                    <article class="benefit-card" data-toggle="benefit">
-                        <header class="benefit-header">
-                            <span class="emoji-badge" role="img" aria-label="Rayo">⚡</span>
-                            <h3 class="benefit-title">Mejor Rendimiento</h3>
-                        </header>
-                        <p class="benefit-text">
-                            Disminuye la congestión y optimiza el <strong>ancho de banda</strong> entre dominios.
-                        </p>
-                        <div class="benefit-details" hidden>
-                            <ul>
-                                <li>Menos broadcasts innecesarios.</li>
-                                <li>Rutas y ACL más eficientes.</li>
-                                <li>Latencias más predecibles entre servicios.</li>
-                            </ul>
-                        </div>
-                        <button class="benefit-toggle" aria-expanded="false" aria-label="Ver más">Ver más</button>
-                    </article>
-
-                    <!-- 4 -->
-                    <article class="benefit-card" data-toggle="benefit">
-                        <header class="benefit-header">
-                            <span class="emoji-badge" role="img" aria-label="Checklist">📋</span>
-                            <h3 class="benefit-title">Cumplimiento</h3>
-                        </header>
-                        <p class="benefit-text">
-                            Ayuda a cumplir con marcos como <strong>PCI-DSS</strong>, <strong>HIPAA</strong> o
-                            <strong>ISO 27001</strong>.
-                        </p>
-                        <div class="benefit-details" hidden>
-                            <ul>
-                                <li>Separación de datos sensibles y entornos.</li>
-                                <li>Controles de acceso alineados a mínimo privilegio.</li>
-                                <li>Evidencia fácil para auditorías.</li>
-                            </ul>
-                        </div>
-                        <button class="benefit-toggle" aria-expanded="false" aria-label="Ver más">Ver más</button>
-                    </article>
-                </div>
-            </section>
         </main>
     </div>
 
-    <!-- Modal reutilizable del proyecto -->
     <div class="modal" id="appModal" hidden aria-hidden="true" role="dialog" aria-modal="true"
         aria-labelledby="modalTitle">
         <div class="modal-backdrop" data-modal-close></div>
@@ -168,14 +233,14 @@
                 <h3 id="modalTitle">Título del modal</h3>
                 <button class="modal-close" data-modal-close aria-label="Cerrar">✕</button>
             </header>
-            <div class="modal-body" id="modalBody">Contenido del modal…</div>
+            <div class="modal-body" id="modalBody">Contenido del modal...</div>
             <footer class="modal-footer">
                 <button class="btn" data-modal-close>Cerrar</button>
             </footer>
         </div>
     </div>
 
-    <!-- JS global del proyecto -->
+    <!-- JS globales del sitio -->
     <script src="../assets/js/background.js" defer></script>
     <script src="../assets/js/effects.js" defer></script>
     <script src="../assets/js/nav.js" defer></script>
@@ -183,11 +248,11 @@
     <script src="../assets/js/modal.js" defer></script>
     <script src="../assets/js/app.js" defer></script>
 
-    <!-- JS específico de esta página -->
-    <script src="../assets/js/beneficios.js" defer></script>
+    <!-- JS específico -->
+    <script src="../assets/js/division.js" defer></script>
 
-    
-
+    <!-- Importante: el script del navbar debe ir al final para asegurarse de que el DOM esté cargado -->
+    <script src="../assets/js/navbar.js" defer></script>
 </body>
 
 </html>

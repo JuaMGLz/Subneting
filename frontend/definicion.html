@@ -6,7 +6,7 @@
     <meta charset="UTF-8" />
 
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Segmentación de Redes - Definición</title>
+    <title>Subnetting de Redes - Guía Completa</title>
 
 
     <base href="./" />
@@ -29,48 +29,9 @@
     <div class="network-background" id="networkBg" aria-hidden="true"></div>
 
     <div class="dashboard" id="dashboardPage">
-        <nav class="navbar">
-            <div class="navbar-content">
-                <div class="logo" aria-label="UAEMCITOS">🌐 UAEMCITOS</div>
-
-                <div class="nav-menu" role="menubar">
-                    <div class="nav-item" role="none">
-                        <a class="nav-link" href="definicion.html" role="menuitem">Definición</a>
-                    </div>
-
-                    <div class="nav-item" role="none">
-                        <button class="nav-link" data-dropdown="concepts" aria-expanded="false"
-                            aria-controls="conceptsDropdown" role="menuitem">
-                            Conceptos <span class="caret">▼</span>
-                        </button>
-                        <div class="dropdown" id="conceptsDropdown" hidden>
-                            <a class="dropdown-item" href="pages/tipos_segmentacion.html">Tipos de Segmentación</a>
-                            <a class="dropdown-item" href="pages/beneficios.html">Beneficios</a>
-                            <a class="dropdown-item" href="pages/implementacion.html">Implementación</a>
-                        </div>
-                    </div>
-
-                    <div class="nav-item" role="none">
-                        <button class="nav-link" data-dropdown="tools" aria-expanded="false"
-                            aria-controls="toolsDropdown" role="menuitem">
-                            Herramientas <span class="caret">▼</span>
-                        </button>
-                        <div class="dropdown" id="toolsDropdown" hidden>
-                            <a class="dropdown-item" href="/frontend/pages/division.html">División Visual de Subredes</a>
-                            <a class="dropdown-item" href="/frontend/pages/calculadora.html">Calculadora Inteligente de Subredes</a>
-                            <a class="dropdown-item" href="/frontend/pages/validacion.html">Sistema Adaptativo de Validación</a>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="user-menu">
-                    <span id="welcomeUser" class="welcome">Bienvenido, Usuario</span>
-                    <button id="logoutBtn" class="logout-btn">Salir</button>
-                </div>
-            </div>
-        </nav>
-
+        <!-- El navbar será cargado automáticamente por el archivo JS -->
         <main class="main-content" id="mainContent" tabindex="-1">
+            <!-- Contenido específico de esta página -->
         </main>
     </div>
 
@@ -97,8 +58,9 @@
     <script src="assets/js/modal.js" defer></script>
     <script src="assets/js/app.js" defer></script>
 
+    <!-- Importante: el script del navbar debe ir al final para asegurarse de que el DOM esté cargado -->
+    <script src="assets/js/navbar.js" defer></script>
 
-    
 </body>
 
 </html>
