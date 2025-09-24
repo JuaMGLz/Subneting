@@ -16,8 +16,8 @@ document.addEventListener("DOMContentLoaded", () => {
                         </button>
                         <div class="dropdown" id="conceptsDropdown" hidden>
                             <a class="dropdown-item" href="pages/tipos_segmentacion.html">Conversión a binario</a>
-                            <a class="dropdown-item" href="pages/beneficios.html">Beneficios</a>
-                            <a class="dropdown-item" href="pages/implementacion.html">Implementación</a>
+                            <a class="dropdown-item" href="pages/beneficios.html">Potencia de 2</a>
+                            <a class="dropdown-item" href="pages/implementacion.html">VLSM</a>
                         </div>
                     </div>
 
@@ -35,7 +35,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 </div>
 
                 <div class="user-menu">
-                    <span id="welcomeUser" class="welcome">Bienvenido, Usuario</span>
+                    <span id="welcomeUser" class="welcome">Bienvenido</span>
                     <button id="logoutBtn" class="logout-btn">Salir</button>
                 </div>
             </div>
