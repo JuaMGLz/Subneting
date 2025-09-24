@@ -1,0 +1,445 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Método Avanzado - UAEMCITOS</title>
+
+    <!-- CSS globales (orden recomendado) -->
+    <link rel="stylesheet" href="../assets/css/theme.css">
+    <link rel="stylesheet" href="../assets/css/base.css">
+    <link rel="stylesheet" href="../assets/css/components.css">
+    <link rel="stylesheet" href="../assets/css/navbar.css">
+    <link rel="stylesheet" href="../assets/css/background.css">
+    <link rel="stylesheet" href="../assets/css/content.css">
+
+    <!-- CSS específico de esta página -->
+    <link rel="stylesheet" href="../assets/css/content_division.css">
+    <link rel="stylesheet" href="../assets/css/content_subredes.css">
+
+    <style>
+        /* Estilos específicos para esta página */
+        .concept-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin: 20px 0;
+        }
+
+        .concept-card-small {
+            background: rgba(255, 255, 255, 0.06);
+            border: 1px solid rgba(255, 255, 255, 0.18);
+            border-radius: 12px;
+            padding: 20px;
+            text-align: center;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .concept-card-small:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 25px rgba(0, 212, 255, 0.15);
+        }
+
+        .concept-card-small h3 {
+            color: #00d4ff;
+            font-size: 18px;
+            margin-bottom: 10px;
+            font-weight: 700;
+        }
+
+        .concept-card-small p {
+            color: #e9f5ff;
+            font-size: 14px;
+            line-height: 1.6;
+        }
+
+        .host-requirements {
+            background: rgba(0, 212, 255, 0.06);
+            border: 1px solid rgba(0, 212, 255, 0.2);
+            border-radius: 12px;
+            padding: 20px;
+            margin: 20px 0;
+        }
+
+        .host-item {
+            background: rgba(255, 255, 255, 0.08);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            border-radius: 8px;
+            padding: 12px;
+            margin: 8px 0;
+            text-align: center;
+            font-weight: 600;
+            transition: transform 0.2s ease;
+        }
+
+        .host-item:hover {
+            transform: scale(1.02);
+        }
+
+        .host-item.rrhh {
+            border-left: 4px solid #ff6b6b;
+        }
+
+        .host-item.ventas {
+            border-left: 4px solid #feca57;
+        }
+
+        .host-item.gerencia {
+            border-left: 4px solid #48cab3;
+        }
+
+        .host-item.impresoras {
+            border-left: 4px solid #3742fa;
+        }
+
+        .formula-table {
+            overflow-x: auto;
+            margin: 20px 0;
+        }
+
+        .formula-table table {
+            width: 100%;
+            border-collapse: collapse;
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 12px;
+            overflow: hidden;
+        }
+
+        .formula-table th,
+        .formula-table td {
+            padding: 12px;
+            text-align: center;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .formula-table th {
+            background: rgba(0, 212, 255, 0.15);
+            color: #00d4ff;
+            font-weight: 700;
+        }
+
+        .formula-table td {
+            color: #e9f5ff;
+        }
+
+        .subnet-result {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin: 20px 0;
+        }
+
+        .subnet-card {
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            border-radius: 12px;
+            padding: 16px;
+            text-align: center;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .subnet-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 25px rgba(0, 212, 255, 0.15);
+        }
+
+        .subnet-title {
+            font-weight: 700;
+            font-size: 16px;
+            margin-bottom: 8px;
+        }
+
+        .subnet-card.rrhh .subnet-title {
+            color: #ff6b6b;
+        }
+
+        .subnet-card.ventas .subnet-title {
+            color: #feca57;
+        }
+
+        .subnet-card.gerencia .subnet-title {
+            color: #48cab3;
+        }
+
+        .subnet-card.impresoras .subnet-title {
+            color: #3742fa;
+        }
+
+        .subnet-info {
+            color: #b3b3b3;
+            font-size: 14px;
+            line-height: 1.5;
+        }
+
+        .network-visual {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 30px 0;
+        }
+
+        .network-circle {
+            width: 200px;
+            height: 200px;
+            border: 3px solid #00d4ff;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(0, 212, 255, 0.05);
+            font-size: 18px;
+            font-weight: 700;
+            color: #00d4ff;
+            box-shadow: 0 0 30px rgba(0, 212, 255, 0.3);
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+
+            0%,
+            100% {
+                transform: scale(1);
+                box-shadow: 0 0 30px rgba(0, 212, 255, 0.3);
+            }
+
+            50% {
+                transform: scale(1.05);
+                box-shadow: 0 0 40px rgba(0, 212, 255, 0.5);
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="network-background" id="networkBg" aria-hidden="true"></div>
+
+    <div class="dashboard" id="dashboardPage">
+        <!-- El navbar será cargado automáticamente por el archivo JS -->
+
+        <main class="main-content" id="mainContent" tabindex="-1">
+            <div class="tutorial-container">
+                <header class="tutorial-header">
+                    <h1 class="tutorial-title">Método Avanzado para la División de Redes</h1>
+                    <p class="tutorial-subtitle">
+                        Aprende a dividir redes usando VLSM (Máscara de Subred de Longitud Variable)
+                    </p>
+                </header>
+
+                <section class="section-concepts">
+                    <h2 class="section-title">Conceptos Claves Antes de Empezar</h2>
+                    <div class="concept-grid">
+                        <div class="concept-card-small">
+                            <h3>Dirección IP</h3>
+                            <p>Es como el número de casa de un dispositivo en la red. Es única y lo identifica.</p>
+                        </div>
+                        <div class="concept-card-small">
+                            <h3>Máscara de Subred</h3>
+                            <p>Es la regla que define qué parte de la IP es la red y qué parte es el host.</p>
+                        </div>
+                        <div class="concept-card-small">
+                            <h3>CIDR (/24)</h3>
+                            <p>Es la forma corta de escribir la máscara de subred. El número indica la cantidad de bits
+                                para la porción de red.</p>
+                        </div>
+                    </div>
+                </section>
+
+                <div class="step-card">
+                    <div class="step-number">1</div>
+                    <div class="step-content">
+                        <h3 class="step-title">Paso 1: Imagina un Pastel (Tu Red Original)</h3>
+                        <p class="step-text">
+                            Tu red es como un gran pastel que tienes que cortar en rebanadas de diferentes tamaños para
+                            tus invitados (los departamentos de tu empresa).
+                        </p>
+                        <div class="network-visual">
+                            <div class="network-circle">192.168.1.0/24</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="step-card">
+                    <div class="step-number">2</div>
+                    <div class="step-content">
+                        <h3 class="step-title">Paso 2: Ordena las Rebanadas (Requerimientos de Hosts)</h3>
+                        <p class="step-text">
+                            Para ser eficiente, primero dale la rebanada más grande al invitado que más necesita.
+                            Después sigue con los demás en orden descendente.
+                        </p>
+                        <div class="host-requirements">
+                            <div class="host-item rrhh">RR.HH. (50 hosts)</div>
+                            <div class="host-item ventas">Ventas (20 hosts)</div>
+                            <div class="host-item gerencia">Gerencia (10 hosts)</div>
+                            <div class="host-item impresoras">Impresoras (2 hosts)</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="step-card">
+                    <div class="step-number">3</div>
+                    <div class="step-content">
+                        <h3 class="step-title">Paso 3: Determina los Bits para Host</h3>
+                        <p class="step-text">
+                            Usa la fórmula mágica <strong>2^n - 2 ≥ hosts</strong> para encontrar el número de hosts que
+                            se ajusta a tus necesidades. El valor 'n' representa la cantidad de bits que necesitas para
+                            acomodar a todos tus hosts.
+                        </p>
+                        <div class="intro-text alert-box">
+                            <strong>Recuerda:</strong> La máscara de subred original es /24 (24 bits para la red). Si
+                            necesitas 'n' bits para los hosts, tu nueva máscara CIDR será <span class="highlight">32 -
+                                n</span>.
+                        </div>
+                    </div>
+                </div>
+
+                <div class="step-card">
+                    <div class="step-number">4</div>
+                    <div class="step-content">
+                        <h3 class="step-title">Paso 4: Calcula las Máscaras de Subred</h3>
+                        <p class="step-text">
+                            Aplica la fórmula para cada departamento y determina su máscara correspondiente.
+                        </p>
+                        <div class="formula-table">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>Hosts requeridos</th>
+                                        <th>Potencia de 2 (2^n)</th>
+                                        <th>Hosts disponibles (2^n - 2)</th>
+                                        <th>Nueva Máscara de Subred</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>50 (RR.HH.)</td>
+                                        <td><strong>2^6 = 64</strong></td>
+                                        <td>62</td>
+                                        <td>/26 (32 - 6)</td>
+                                    </tr>
+                                    <tr>
+                                        <td>20 (Ventas)</td>
+                                        <td><strong>2^5 = 32</strong></td>
+                                        <td>30</td>
+                                        <td>/27 (32 - 5)</td>
+                                    </tr>
+                                    <tr>
+                                        <td>10 (Gerencia)</td>
+                                        <td><strong>2^4 = 16</strong></td>
+                                        <td>14</td>
+                                        <td>/28 (32 - 4)</td>
+                                    </tr>
+                                    <tr>
+                                        <td>2 (Impresoras)</td>
+                                        <td><strong>2^2 = 4</strong></td>
+                                        <td>2</td>
+                                        <td>/30 (32 - 2)</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="step-card">
+                    <div class="step-number">5</div>
+                    <div class="step-content">
+                        <h3 class="step-title">Paso 5: Asigna las Subredes</h3>
+                        <p class="step-text">
+                            Empieza con la red original y asigna consecutivamente. La dirección de la siguiente subred
+                            es la dirección de broadcast de la subred anterior más 1.
+                        </p>
+
+                        <div class="host-requirements">
+                            <div class="host-item rrhh">RR.HH. (50 hosts)</div>
+                            <div class="host-item ventas">Ventas (20 hosts)</div>
+                            <div class="host-item gerencia">Gerencia (10 hosts)</div>
+                            <div class="host-item impresoras">Impresoras (2 hosts)</div>
+                        </div>
+
+                        <div class="intro-text alert-box purple-alert" style="margin-top: 20px;">
+                            <strong>Direcciones de Broadcast:</strong><br>
+                            • RR.HH.: 192.168.1.63<br>
+                            • Ventas: 192.168.1.95<br>
+                            • Gerencia: 192.168.1.111<br>
+                            • Impresoras: 192.168.1.115
+                        </div>
+
+                        <div class="range-box"
+                            style="margin-top: 20px; text-align: center; background: rgba(0, 0, 0, 0.4); border-radius: 8px; padding: 10px; border: 1px solid rgba(255, 255, 255, 0.1);">
+                            <div style="font-weight: 600; color: #e9f5ff;">Rango: 192.168.1.113 - 192.168.1.114</div>
+                        </div>
+                    </div>
+                </div>
+
+                <section class="section-summary">
+                    <h2 class="section-title">Resumen del Método Avanzado</h2>
+                    <ol class="concept-list">
+                        <li>
+                            <strong>Paso 1:</strong> Ordena los requerimientos de hosts de <span class="highlight">mayor
+                                a menor</span>.
+                        </li>
+                        <li>
+                            <strong>Paso 2:</strong> Para cada requerimiento, usa la fórmula <span class="highlight">2^n
+                                - 2 ≥ hosts</span> para encontrar la potencia de 2 que más se ajuste.
+                        </li>
+                        <li>
+                            <strong>Paso 3:</strong> Resta la potencia de 2 a 32 para obtener la nueva <span
+                                class="highlight">máscara de subred</span>.
+                        </li>
+                        <li>
+                            <strong>Paso 4:</strong> Asigna la primera subred (la más grande) a la <span
+                                class="highlight">dirección de red original</span>.
+                        </li>
+                        <li>
+                            <strong>Paso 5:</strong> Para cada subred siguiente, calcula el salto y úsalo para encontrar
+                            la <span class="highlight">siguiente dirección de red</span>.
+                        </li>
+                        <li>
+                            <strong>Paso 6:</strong> Repite hasta que todas las <span class="highlight">subredes hayan
+                                sido asignadas</span>.
+                        </li>
+                    </ol>
+                </section>
+
+                <div class="summary-text text-center mt-8">
+                    <p class="font-semibold">
+                        ¡Y listo! Con el método VLSM puedes optimizar el uso del espacio de direcciones IP y crear
+                        subredes eficientes para cada departamento.
+                    </p>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <div class="modal" id="appModal" hidden aria-hidden="true" role="dialog" aria-modal="true"
+        aria-labelledby="modalTitle">
+        <div class="modal-backdrop" data-modal-close></div>
+        <div class="modal-dialog" role="document">
+            <header class="modal-header">
+                <h3 id="modalTitle">Título del modal</h3>
+                <button class="modal-close" data-modal-close aria-label="Cerrar">✕</button>
+            </header>
+            <div class="modal-body" id="modalBody">Contenido del modal...</div>
+            <footer class="modal-footer">
+                <button class="btn" data-modal-close>Cerrar</button>
+            </footer>
+        </div>
+    </div>
+
+    <!-- JS globales del sitio -->
+    <script src="../assets/js/background.js" defer></script>
+    <script src="../assets/js/effects.js" defer></script>
+    <script src="../assets/js/nav.js" defer></script>
+    <script src="../assets/js/auth.js" defer></script>
+    <script src="../assets/js/modal.js" defer></script>
+    <script src="../assets/js/app.js" defer></script>
+
+    <!-- JS específico -->
+    <script src="../assets/js/division.js" defer></script>
+
+    <!-- Importante: el script del navbar debe ir al final para asegurarse de que el DOM esté cargado -->
+    <script src="../assets/js/navbar.js" defer></script>
+</body>
+
+</html>

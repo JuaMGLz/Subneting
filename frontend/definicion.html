@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+
+    <meta charset="UTF-8" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Subnetting de Redes - Guía Completa</title>
+
+
+    <base href="./" />
+
+
+    <link rel="stylesheet" href="assets/css/base.css" />
+
+    <link rel="stylesheet" href="assets/css/theme.css" />
+
+    <link rel="stylesheet" href="assets/css/background.css" />
+
+    <link rel="stylesheet" href="assets/css/navbar.css" />
+
+    <link rel="stylesheet" href="assets/css/content.css" />
+
+    <link rel="stylesheet" href="assets/css/components.css" />
+</head>
+
+<body>
+    <div class="network-background" id="networkBg" aria-hidden="true"></div>
+
+    <div class="dashboard" id="dashboardPage">
+        <!-- El navbar será cargado automáticamente por el archivo JS -->
+        <main class="main-content" id="mainContent" tabindex="-1">
+            <!-- Contenido específico de esta página -->
+        </main>
+    </div>
+
+    <div class="modal" id="appModal" hidden aria-hidden="true" role="dialog" aria-modal="true"
+        aria-labelledby="modalTitle">
+        <div class="modal-backdrop" data-modal-close></div>
+        <div class="modal-dialog" role="document">
+            <header class="modal-header">
+                <h3 id="modalTitle">Título del modal</h3>
+                <button class="modal-close" data-modal-close aria-label="Cerrar">✕</button>
+            </header>
+            <div class="modal-body" id="modalBody">Contenido del modal...</div>
+            <footer class="modal-footer">
+                <button class="btn" data-modal-close>Cerrar</button>
+            </footer>
+        </div>
+    </div>
+
+  <script src="/frontend/assets/js/background.js" defer></script>
+  <script src="/frontend/assets/js/effects.js" defer></script>
+  <script src="/frontend/assets/js/content.js" defer></script>
+  <script src="/frontend/assets/js/nav.js" defer></script>
+  <script src="/frontend/assets/js/auth.js" defer></script>
+  <script src="/frontend/assets/js/modal.js" defer></script>
+  <script src="/frontend/assets/js/app.js" defer></script>
+
+    <!-- Importante: el script del navbar debe ir al final para asegurarse de que el DOM esté cargado -->
+    <script src="assets/js/navbar.js" defer></script>
+
+</body>
+
+</html>
