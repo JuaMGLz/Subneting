@@ -14,64 +14,47 @@
   // Referencia al formulario de login
   const loginForm = document.getElementById("loginForm");
 
-  // Lógica de autenticación
-function handleLogin() {
-    if (loginForm) {
-        loginForm.addEventListener("submit", function (e) {
-            e.preventDefault();
-
-            const username = document.getElementById("username").value;
-            
-
-            if (username) {
-                localStorage.setItem("currentUser", username);
-                window.location.href = "definicion.html";
-            }
-        });
-    }
-}
-
-  // Lógica de logout
-function handleLogin() {
-    if (loginForm) {
-        loginForm.addEventListener("submit", function (e) {
-            e.preventDefault();
-
-            const username = document.getElementById("username").value;
-            // La línea de la contraseña ya no es necesaria
-            // const password = document.getElementById("password").value;
-
-            // Solo se valida que el campo de usuario no esté vacío
-            if (username) {
-                localStorage.setItem("currentUser", username);
-                window.location.href = "definicion.html";
-            } else {
-                alert("Por favor, ingresa tu usuario.");
-            }
-        });
-    }
-}
-
-  // Lógica de inicialización al cargar la página
-  function initialize() {
-    // Si estás en la página de login, maneja el login
+  // ✅ Lógica de login
+  function handleLogin() {
     if (loginForm) {
-      modules.background?.init(); // Solo inicializa el fondo en la página de login
-      handleLogin();
-    }
-    // Si estás en alguna página del dashboard (como definicion.html)
-    else {
-      // Inicializa todos los demás módulos de la aplicación
-      modules.background?.init();
-      modules.effects?.init();
-      modules.content?.set("definition"); // Carga el contenido de definición por defecto
-      modules.nav?.init();
-      modules.auth?.init();
-      modules.modal?.init();
-      handleLogout();
+      loginForm.addEventListener("submit", function (e) {
+        e.preventDefault();
+
+        const username = document.getElementById("username").value;
+
+        if (username) {
+          localStorage.setItem("currentUser", username);
+          window.location.href = "definicion.html";
+        } else {
+          alert("Por favor, ingresa tu usuario.");
+        }
+      });
     }
   }
 
-  // Ejecuta la inicialización cuando el DOM esté completamente cargado
+  // ✅ Lógica de logout (¡aquí estaba el error!)
+  function handleLogout() {
+    // Por ahora solo es un placeholder para evitar el ReferenceError
+    console.log("Logout ejecutado (placeholder)");
+  }
+
+  // ✅ Inicializar módulos según la página
+  function initialize() {
+    if (loginForm) {
+      modules.background?.init(); // Fondo solo en login
+      handleLogin();
+    } else {
+      // Dashboard
+      modules.background?.init();
+      modules.effects?.init();
+      modules.content?.set("definition");
+      modules.nav?.init();
+      modules.auth?.init();
+      modules.modal?.init();
+
+      handleLogout(); // ✅ Ya no lanzará error
+    }
+  }
+
   document.addEventListener("DOMContentLoaded", initialize);
 })();
