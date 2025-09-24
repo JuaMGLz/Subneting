@@ -1,27 +1,9 @@
 <!DOCTYPE html>
 <html lang="es">
-<<<<<<< HEAD
-
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>División de Redes (Subnetting) - UAEMCITOS</title>
-
-  <!-- CSS globales (orden recomendado) -->
-  <link rel="stylesheet" href="../assets/css/theme.css">
-  <link rel="stylesheet" href="../assets/css/base.css">
-  <link rel="stylesheet" href="../assets/css/components.css">
-  <link rel="stylesheet" href="../assets/css/navbar.css">
-  <link rel="stylesheet" href="../assets/css/background.css">
-  <link rel="stylesheet" href="../assets/css/content.css">
-
-  <!-- CSS específico de esta página -->
-  <link rel="stylesheet" href="../assets/css/content_division.css">
-=======
 <head>
     <meta charset="UTF-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <title>Sistema Adaptativo de Validación de Subredes</title>
+    <title>Comprueba tu Nivel de Subredes</title>
 
     <link rel="stylesheet" href="../assets/css/theme.css">
     <link rel="stylesheet" href="../assets/css/base.css">
@@ -29,294 +11,356 @@
     <link rel="stylesheet" href="../assets/css/navbar.css">
     <link rel="stylesheet" href="../assets/css/background.css">
     <link rel="stylesheet" href="../assets/css/content.css">
-
     <link rel="stylesheet" href="../assets/css/content_validacion.css">
->>>>>>> c2fad5c5d783516fc7871b0e960ac467167906d6
+
+        <style>
+    /* Estilos adicionales para el modal de quiz */
+    .quiz-modal {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.8);
+      backdrop-filter: blur(10px);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 1000;
+      animation: fadeIn 0.3s ease;
+      overflow-y: auto;
+      padding: 20px 0;
+    }
+
+    .quiz-container {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      border-radius: 20px;
+      padding: 40px;
+      max-width: 600px;
+      width: 90%;
+      max-height: 90vh;
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+      text-align: center;
+      color: white;
+      animation: slideIn 0.5s ease;
+      overflow-y: auto;
+      margin: auto;
+      
+      /* Scroll invisible */
+      scrollbar-width: none; /* Firefox */
+      -ms-overflow-style: none; /* IE y Edge */
+    }
+
+    .quiz-container::-webkit-scrollbar {
+      display: none; /* Chrome, Safari, Opera */
+    }
+
+    .quiz-title {
+      font-size: 2.5em;
+      margin-bottom: 10px;
+      background: linear-gradient(45deg, #fff, #e0e7ff);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .quiz-subtitle {
+      font-size: 1.2em;
+      margin-bottom: 30px;
+      opacity: 0.9;
+    }
+
+    .concept-box {
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 15px;
+      padding: 25px;
+      margin: 25px 0;
+      text-align: left;
+      backdrop-filter: blur(5px);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+    }
+
+    .concept-title {
+      font-size: 1.4em;
+      font-weight: bold;
+      margin-bottom: 15px;
+      color: #ffd700;
+    }
+
+    .concept-parts {
+      margin-top: 15px;
+    }
+
+    .concept-parts li {
+      margin: 10px 0;
+      list-style: none;
+      padding-left: 20px;
+      position: relative;
+    }
+
+    .concept-parts li::before {
+      content: "🔸";
+      position: absolute;
+      left: 0;
+    }
+
+    .quiz-question {
+      background: rgba(255, 255, 255, 0.15);
+      border-radius: 15px;
+      padding: 25px;
+      margin: 25px 0;
+      text-align: left;
+    }
+
+    .quiz-options {
+      display: grid;
+      gap: 15px;
+      margin-top: 20px;
+    }
+
+    .quiz-option {
+      background: rgba(255, 255, 255, 0.1);
+      border: 2px solid rgba(255, 255, 255, 0.3);
+      border-radius: 12px;
+      padding: 15px 20px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      text-align: left;
+      color: white;
+      font-size: 1.1em;
+    }
+
+    .quiz-option:hover {
+      background: rgba(255, 255, 255, 0.2);
+      border-color: rgba(255, 255, 255, 0.6);
+      transform: translateY(-2px);
+    }
+
+    .quiz-option.selected {
+      background: rgba(74, 222, 128, 0.3);
+      border-color: #4ade80;
+      box-shadow: 0 0 20px rgba(74, 222, 128, 0.3);
+    }
+
+    .quiz-option.incorrect {
+      background: rgba(248, 113, 113, 0.3);
+      border-color: #f87171;
+      animation: shake 0.5s ease;
+    }
+
+    .quiz-option.correct {
+      background: rgba(74, 222, 128, 0.3);
+      border-color: #4ade80;
+      box-shadow: 0 0 20px rgba(74, 222, 128, 0.5);
+    }
+
+    .quiz-buttons {
+      margin-top: 30px;
+      display: flex;
+      gap: 15px;
+      justify-content: center;
+    }
+
+    .quiz-btn {
+      background: linear-gradient(45deg, #4ade80, #22c55e);
+      border: none;
+      border-radius: 12px;
+      padding: 15px 30px;
+      color: white;
+      font-size: 1.1em;
+      font-weight: bold;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 15px rgba(34, 197, 94, 0.3);
+    }
+
+    .quiz-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(34, 197, 94, 0.4);
+    }
+
+    .quiz-btn:disabled {
+      background: rgba(156, 163, 175, 0.5);
+      cursor: not-allowed;
+      transform: none;
+      box-shadow: none;
+    }
+
+    .quiz-retry {
+      background: linear-gradient(45deg, #f59e0b, #d97706);
+      box-shadow: 0 4px 15px rgba(245, 158, 11, 0.3);
+    }
+
+    .quiz-retry:hover {
+      box-shadow: 0 6px 20px rgba(245, 158, 11, 0.4);
+    }
+
+    .content-locked {
+      filter: blur(5px);
+      pointer-events: none;
+      user-select: none;
+    }
+
+    .result-message {
+      margin-top: 20px;
+      padding: 20px;
+      border-radius: 12px;
+      font-size: 1.2em;
+      font-weight: bold;
+    }
+
+    .result-success {
+      background: rgba(74, 222, 128, 0.2);
+      border: 2px solid #4ade80;
+      color: #4ade80;
+    }
+
+    .result-error {
+      background: rgba(248, 113, 113, 0.2);
+      border: 2px solid #f87171;
+      color: #f87171;
+    }
+
+    .progress-bar {
+      width: 100%;
+      height: 6px;
+      background: rgba(255, 255, 255, 0.2);
+      border-radius: 3px;
+      margin: 20px 0;
+      overflow: hidden;
+    }
+
+    .progress-fill {
+      height: 100%;
+      background: linear-gradient(45deg, #4ade80, #22c55e);
+      width: 0%;
+      transition: width 0.3s ease;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    @keyframes slideIn {
+      from { 
+        opacity: 0;
+        transform: translateY(30px) scale(0.9);
+      }
+      to { 
+        opacity: 1;
+        transform: translateY(0) scale(1);
+      }
+    }
+
+    /* Media queries para responsividad */
+    @media (max-height: 800px) {
+      .quiz-container {
+        padding: 25px;
+        max-height: 85vh;
+      }
+      
+      .concept-box {
+        padding: 20px;
+        margin: 15px 0;
+      }
+      
+      .quiz-question {
+        padding: 20px;
+        margin: 15px 0;
+      }
+    }
+
+    @media (max-height: 600px) {
+      .quiz-container {
+        padding: 20px;
+        max-height: 90vh;
+      }
+      
+      .quiz-title {
+        font-size: 2em;
+        margin-bottom: 8px;
+      }
+      
+      .quiz-subtitle {
+        font-size: 1.1em;
+        margin-bottom: 20px;
+      }
+      
+      .concept-box, .quiz-question {
+        padding: 15px;
+        margin: 10px 0;
+      }
+    }
+
+    @keyframes shake {
+      0%, 100% { transform: translateX(0); }
+      25% { transform: translateX(-10px); }
+      75% { transform: translateX(10px); }
+    }
+  </style>
 </head>
 
 <body>
-    <div class="network-background" id="networkBg" aria-hidden="true"></div>
-
-<<<<<<< HEAD
-  <div class="dashboard" id="dashboardPage">
-    <!-- El navbar será cargado automáticamente por el archivo JS -->
-    <main class="main-content" id="mainContent" tabindex="-1">
-      <div class="tutorial-container">
-        <header class="tutorial-header">
-          <h1 class="tutorial-title">División de Redes (Subnetting) para Principiantes</h1>
-          <p class="tutorial-subtitle">
-            Aprende a dividir una red grande en redes más pequeñas de forma manual y sencilla. ¡Sin programas, solo con
-            tu cerebro!
-          </p>
-        </header>
-
-        <section>
-          <h2 class="section-title">¿Qué es una dirección IP?</h2>
-          <div class="intro-text">
-            Una dirección IP es como la dirección de tu casa, pero para un dispositivo en una red. Se compone de 4
-            números del 0 al 255, separados por puntos.
-            Ejemplo: <span class="highlight">192.168.10.15</span>
-          </div>
-          <div class="intro-text">
-            La dirección IP se divide en dos partes:
-          </div>
-          <ul class="concept-list">
-            <li><span class="highlight">Parte de Red:</span> Es como el nombre de la calle. Es la misma para todos los
-              dispositivos en la misma red.</li>
-            <li><span class="highlight">Parte de Host:</span> Es como el número de la casa. Es única para cada
-              dispositivo en esa red.</li>
-          </ul>
-        </section>
-
-        <section>
-          <h2 class="section-title">Conceptos Clave que Necesitas Saber</h2>
-          <div class="concepts-grid">
-            <div class="concept-card">
-              <h3 class="concept-title">Máscara de Subred</h3>
-              <p class="concept-description">
-                Es la herramienta que te dice qué parte de la IP es la "Parte de Red" y qué parte es la "Parte de Host".
-                Se compone de una serie de unos seguidos de ceros.
-              </p>
-            </div>
-            <div class="concept-card">
-              <h3 class="concept-title">Subred (Subnet)</h3>
-              <p class="concept-description">
-                Es una red más pequeña que se crea a partir de una red principal más grande. Esto ayuda a organizar y
-                gestionar la red de forma más eficiente.
-              </p>
-            </div>
-            <div class="concept-card">
-              <h3 class="concept-title">Host</h3>
-              <p class="concept-description">
-                Cualquier dispositivo que se conecta a una red, como una computadora, un teléfono o una impresora.
-              </p>
-            </div>
-            <div class="concept-card">
-              <h3 class="concept-title">Dirección de Red</h3>
-              <p class="concept-description">
-                Es la primera dirección en una subred. Sirve para identificar la red en su totalidad y no se puede
-                asignar a ningún dispositivo (host).
-              </p>
-            </div>
-            <div class="concept-card">
-              <h3 class="concept-title">Dirección de Broadcast</h3>
-              <p class="concept-description">
-                Es la última dirección en una subred. Se usa para enviar un mensaje a todos los dispositivos que están
-                en esa subred al mismo tiempo. No se puede asignar a un host.
-              </p>
-            </div>
-          </div>
-        </section>
-
-        <section>
-          <h2 class="section-title">Paso a Paso: El Método Manual</h2>
-          <div class="intro-text">
-            Vamos a usar un ejemplo: queremos dividir la red <span class="highlight">192.168.1.0</span> con una máscara
-            de subred <span class="highlight">255.255.255.0</span> en 4 subredes más pequeñas.
-          </div>
-
-          <div class="steps-container">
-            <div class="step-card">
-              <div class="step-number">1</div>
-              <div class="step-content">
-                <h3 class="step-title">Conviértelo a Binario</h3>
-                <p class="step-text">
-                  Para hacer los cálculos, necesitamos convertir la máscara de subred (255.255.255.0) a binario (ceros y
-                  unos). Cada 255 es un octeto (8 bits) lleno de unos, y el 0 son 8 ceros.
-                </p>
-                <div class="code-box">
-                  255.255.255.0 <br>
-                  <span class="code-highlight">11111111.11111111.11111111</span>.00000000
-                </div>
-                <p class="step-text">
-                  Contamos los unos, lo que nos da el <span class="highlight">CIDR</span>. En este caso, hay 24 unos,
-                  así que es un /24.
-                </p>
-              </div>
-            </div>
-
-            <div class="step-card">
-              <div class="step-number">2</div>
-              <div class="step-content">
-                <h3 class="step-title">Calcula la cantidad de Subredes</h3>
-                <p class="step-text">
-                  La fórmula es <strong>2<sup>n</sup></strong>, donde 'n' es el número de bits que vamos a "tomar
-                  prestados" de la parte de Host. Necesitamos 4 subredes, así que buscamos la potencia de 2 que sea
-                  igual o mayor a 4.
-                </p>
-                <div class="code-box">
-                  2^1 = 2 (No alcanza)<br>
-                  <span class="code-highlight">2^2 = 4</span> (¡Exacto!)
-                </div>
-                <p class="step-text">
-                  Necesitamos <span class="highlight">2 bits</span> prestados.
-                </p>
-              </div>
-            </div>
-
-            <div class="step-card">
-              <div class="step-number">3</div>
-              <div class="step-content">
-                <h3 class="step-title">Calcula la cantidad de Hosts</h3>
-                <p class="step-text">
-                  Ahora, la fórmula es <strong>2<sup>h</sup> - 2</strong>, donde 'h' es el número de bits restantes en
-                  la parte de Host. Nuestra máscara original tenía 8 bits de Host, y prestamos 2, así que nos quedan 6.
-                </p>
-                <div class="code-box">
-                  8 - 2 = 6 bits restantes<br>
-                  2^6 - 2 = 64 - 2 = <span class="code-highlight">62 hosts por subred</span>
-                </div>
-                <p class="step-text">
-                  El '- 2' es porque una dirección se usa para la red y otra para el broadcast (mensaje a todos los
-                  hosts).
-                </p>
-              </div>
-            </div>
-
-            <div class="step-card">
-              <div class="step-number">4</div>
-              <div class="step-content">
-                <h3 class="step-title">Calcula el Salto de Red</h3>
-                <p class="step-text">
-                  Para encontrar la dirección de la primera subred, sumamos un número mágico a nuestra dirección
-                  original. Este número se llama "salto" y se calcula con la fórmula <strong>256 - Máscara
-                    Nueva</strong>.
-                </p>
-                <p class="step-text">
-                  Primero, calculamos la Máscara Nueva. La parte de Red tiene 24 unos, y le sumamos los 2 que prestamos.
-                  Son 26 unos. Para saber qué número es, sumamos los valores de los bits que están en "1".
-                </p>
-                <div class="code-box">
-                  <span class="code-highlight">11111111.11111111.11111111.</span><span class="code-red">11</span>000000
-                  <br>
-                  Máscara anterior: 255.255.255.<span class="code-red">0</span> <br>
-                  Valores: 128 + 64 = 192 <br>
-                  Máscara nueva: 255.255.255.<span class="code-highlight">192</span>
-                </div>
-                <div class="code-box">
-                  Salto = 256 - 192 = <span class="code-highlight">64</span>
-                </div>
-                <p class="step-text">
-                  Este es el "salto". Cada subred comenzará a 64 números de la anterior.
-                </p>
-              </div>
-            </div>
-
-            <div class="step-card">
-              <div class="step-number">5</div>
-              <div class="step-content">
-                <h3 class="step-title">Encuentra las direcciones de cada Subred</h3>
-                <p class="step-text">
-                  Usando el salto (64), podemos encontrar las direcciones de red, broadcast y el rango de hosts
-                  utilizables para cada subred.
-                </p>
-                <div class="subnets-grid">
-                  <div class="subnet-info">
-                    <div class="code-box">
-                      <span class="code-highlight">Subred 1:</span> <br>
-                      Dirección de Red: 192.168.1.<span class="code-bold">0</span> <br>
-                      Primer Host: 192.168.1.<span class="code-bold">1</span> <br>
-                      Último Host: 192.168.1.<span class="code-bold">62</span> <br>
-                      Dirección de Broadcast: 192.168.1.<span class="code-bold">63</span>
-                    </div>
-                  </div>
-                  <div class="subnet-info">
-                    <div class="code-box">
-                      <span class="code-highlight">Subred 2:</span> (Sumamos el salto: 0 + 64) <br>
-                      Dirección de Red: 192.168.1.<span class="code-bold">64</span> <br>
-                      Primer Host: 192.168.1.<span class="code-bold">65</span> <br>
-                      Último Host: 192.168.1.<span class="code-bold">126</span> <br>
-                      Dirección de Broadcast: 192.168.1.<span class="code-bold">127</span>
-                    </div>
-                  </div>
-                  <div class="subnet-info">
-                    <div class="code-box">
-                      <span class="code-highlight">Subred 3:</span> (Sumamos el salto: 64 + 64) <br>
-                      Dirección de Red: 192.168.1.<span class="code-bold">128</span> <br>
-                      Primer Host: 192.168.1.<span class="code-bold">129</span> <br>
-                      Último Host: 192.168.1.<span class="code-bold">190</span> <br>
-                      Dirección de Broadcast: 192.168.1.<span class="code-bold">191</span>
-                    </div>
-                  </div>
-                  <div class="subnet-info">
-                    <div class="code-box">
-                      <span class="code-highlight">Subred 4:</span> (Sumamos el salto: 128 + 64) <br>
-                      Dirección de Red: 192.168.1.<span class="code-bold">192</span> <br>
-                      Primer Host: 192.168.1.<span class="code-bold">193</span> <br>
-                      Último Host: 192.168.1.<span class="code-bold">254</span> <br>
-                      Dirección de Broadcast: 192.168.1.<span class="code-bold">255</span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        <section>
-          <h2 class="section-title">Resumen de los Pasos Sencillos</h2>
-          <div class="summary-grid">
-            <div class="summary-card">
-              <h3 class="summary-title">Paso 1: Binario</h3>
-              <p class="summary-text">Convierte la máscara de subred a binario para encontrar los unos.</p>
-            </div>
-            <div class="summary-card">
-              <h3 class="summary-title">Paso 2: Subredes</h3>
-              <p class="summary-text">Usa la fórmula 2<sup>n</sup> para saber cuántos bits "prestar" (n) para obtener el
-                número de subredes que necesitas.</p>
-            </div>
-            <div class="summary-card">
-              <h3 class="summary-title">Paso 3: Hosts</h3>
-              <p class="summary-text">Usa la fórmula 2<sup>h</sup> - 2 para saber cuántos hosts (h) caben en cada
-                subred.</p>
-            </div>
-            <div class="summary-card">
-              <h3 class="summary-title">Paso 4: Salto</h3>
-              <p class="summary-text">Calcula el salto con la fórmula 256 - Máscara Nueva para encontrar los puntos de
-                inicio de cada subred.</p>
-            </div>
-            <div class="summary-card">
-              <h3 class="summary-title">Paso 5: Direcciones</h3>
-              <p class="summary-text">Usa el salto para encontrar las direcciones de red, broadcast y el rango de hosts
-                de cada subred.</p>
-            </div>
-          </div>
-        </section>
+      <!-- Modal de Quiz (aparece primero) -->
+  <div class="quiz-modal" id="quizModal">
+    <div class="quiz-container">
+      <div class="quiz-title">🌐 UAEMCITOS</div>
+      <div class="quiz-subtitle">Antes de continuar, demuestra tus conocimientos</div>
+      
+      <div class="progress-bar">
+        <div class="progress-fill" id="progressFill"></div>
       </div>
-    </main>
-  </div>
 
-  <div class="modal" id="appModal" hidden aria-hidden="true" role="dialog" aria-modal="true"
-    aria-labelledby="modalTitle">
-    <div class="modal-backdrop" data-modal-close></div>
-    <div class="modal-dialog" role="document">
-      <header class="modal-header">
-        <h3 id="modalTitle">Título del modal</h3>
-        <button class="modal-close" data-modal-close aria-label="Cerrar">✕</button>
-      </header>
-      <div class="modal-body" id="modalBody">Contenido del modal...</div>
-      <footer class="modal-footer">
-        <button class="btn" data-modal-close>Cerrar</button>
-      </footer>
+      <!-- Concepto explicativo -->
+      <div class="concept-box">
+        <div class="concept-title">💡 ¿Qué es una dirección IP?</div>
+        <p>Una dirección IP es como la dirección de tu casa, pero para un dispositivo en una red. Se compone de 4 números del 0 al 255, separados por puntos.</p>
+        <p><strong>Ejemplo:</strong> <code style="background: rgba(255,255,255,0.2); padding: 4px 8px; border-radius: 4px;">192.168.10.15</code></p>
+        
+        <div class="concept-parts">
+          <strong>La dirección IP se divide en dos partes:</strong>
+          <ul>
+            <li><strong>Parte de Red:</strong> Es como el nombre de la calle. Es la misma para todos los dispositivos en la misma red.</li>
+            <li><strong>Parte de Host:</strong> Es como el número de la casa. Es única para cada dispositivo en esa red.</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Pregunta -->
+      <div class="quiz-question">
+        <h3>📝 Pregunta de Acceso:</h3>
+        <p><strong>En la dirección IP 192.168.10.15 con máscara /24, ¿cuál es la parte de red?</strong></p>
+        
+        <div class="quiz-options" id="quizOptions">
+          <button class="quiz-option" data-answer="a">
+            <strong>A)</strong> 192.168.10.15
+          </button>
+          <button class="quiz-option" data-answer="b">
+            <strong>B)</strong> 192.168.10.0
+          </button>
+          <button class="quiz-option" data-answer="c">
+            <strong>C)</strong> 15
+          </button>
+          <button class="quiz-option" data-answer="d">
+            <strong>D)</strong> 192.168
+          </button>
+        </div>
+      </div>
+
+      <div id="resultMessage"></div>
+
+      <div class="quiz-buttons">
+        <button class="quiz-btn" id="submitQuiz" disabled>
+          ✅ Verificar Respuesta
+        </button>
+        <button class="quiz-btn quiz-retry" id="retryQuiz" style="display: none;">
+          🔄 Intentar de Nuevo
+        </button>
+      </div>
     </div>
   </div>
+    <div class="network-background" id="networkBg" aria-hidden="true"></div>
 
-  <!-- JS globales del sitio -->
-  <script src="../assets/js/background.js" defer></script>
-  <script src="../assets/js/effects.js" defer></script>
-  <script src="../assets/js/nav.js" defer></script>
-  <script src="../assets/js/auth.js" defer></script>
-  <script src="../assets/js/modal.js" defer></script>
-  <script src="../assets/js/app.js" defer></script>
-
-  <!-- JS específico -->
-  <script src="../assets/js/division.js" defer></script>
-
-  <!-- Importante: el script del navbar debe ir al final para asegurarse de que el DOM esté cargado -->
-  <script src="../assets/js/navbar.js" defer></script>
-</body>
-
-=======
     <div class="dashboard" id="dashboardPage">
         <nav class="navbar">
             <div class="navbar-content">
@@ -340,9 +384,9 @@
                             Herramientas <span class="caret">▼</span>
                         </button>
                         <div class="dropdown" id="toolsDropdown" hidden>
-                            <a class="dropdown-item" href="/frontend/pages/division.html">División Visual de Subredes</a>
-                            <a class="dropdown-item" href="/frontend/pages/calculadora.html">Calculadora Inteligente de Subredes</a>
-                            <a class="dropdown-item" href="/frontend/pages/validacion.html">Sistema Adaptativo de Validación</a>
+                            <a class="dropdown-item" href="/frontend/pages/division.html">Visualizador de Red</a>
+                            <a class="dropdown-item" href="/frontend/pages/calculadora.html">Calculadora de Subredes</a>
+                            <a class="dropdown-item" href="/frontend/pages/validacion.html">Comprueba tu Nivel</a>
                         </div>
                     </div>
                 </div>
@@ -356,8 +400,8 @@
 
         <main class="main-content" id="mainContent" tabindex="-1">
             <section class="content-section">
-                <h2 class="section-title">✅ Sistema Adaptativo de Validación</h2>
-                <p class="definition-text">Responde preguntas que se ajustan a tu nivel y gana experiencia mientras mejoras.</p>
+                <h2 class="section-title">✅ Comprueba tu Nivel</h2>
+                <p class="definition-text">Responde preguntas que se ajustan a tu nivel y gana experiencia mientras mejoras usando el método manual que aprendiste.</p>
                 <div class="toast-container" id="toastContainer" aria-live="polite" aria-atomic="true"></div>
 
                 <div class="panel elevated validacion-wrap">
@@ -369,13 +413,13 @@
                     </div>
 
                     <article class="quiz-card" aria-live="polite">
-                        <span class="difficulty-indicator" id="difficultyBadge">Fácil</span>
+                        <span class="difficulty-indicator" id="difficultyBadge">Principiante</span>
                         <h3 class="subtitle">Pregunta Actual</h3>
                         <p id="currentQuestion" class="question">Preparando pregunta adaptativa...</p>
 
                         <div class="input-group">
                             <label for="answerInput" class="label">Tu respuesta:</label>
-                            <input type="text" id="answerInput" class="input" placeholder="Ejemplo: 192.168.1.0/26" autocomplete="off">
+                            <input type="text" id="answerInput" class="input" placeholder="Ejemplo: 192.168.1.0/26 o 2" autocomplete="off">
                         </div>
 
                         <div class="actions">
@@ -416,7 +460,230 @@
             </section>
         </main>
     </div>
+    <script>
+    // JavaScript para el quiz de acceso
+    class QuizAccess {
+      constructor() {
+        this.correctAnswer = 'b'; // 192.168.10.0 es la respuesta correcta
+        this.selectedAnswer = null;
+        this.attempts = 0;
+        this.maxAttempts = 3;
+        this.init();
+      }
 
+      init() {
+        this.bindEvents();
+        this.updateProgress();
+      }
+
+      bindEvents() {
+        // Opciones de respuesta
+        const options = document.querySelectorAll('.quiz-option');
+        options.forEach(option => {
+          option.addEventListener('click', (e) => this.selectOption(e));
+        });
+
+        // Botón de verificar
+        document.getElementById('submitQuiz').addEventListener('click', () => this.checkAnswer());
+        
+        // Botón de reintentar
+        document.getElementById('retryQuiz').addEventListener('click', () => this.resetQuiz());
+      }
+
+      selectOption(e) {
+        // Limpiar selecciones previas
+        document.querySelectorAll('.quiz-option').forEach(opt => {
+          opt.classList.remove('selected');
+        });
+
+        // Seleccionar la nueva opción
+        e.target.classList.add('selected');
+        this.selectedAnswer = e.target.dataset.answer;
+
+        // Habilitar botón de verificar
+        document.getElementById('submitQuiz').disabled = false;
+      }
+
+      checkAnswer() {
+        this.attempts++;
+        const resultMessage = document.getElementById('resultMessage');
+        const submitBtn = document.getElementById('submitQuiz');
+        const retryBtn = document.getElementById('retryQuiz');
+
+        if (this.selectedAnswer === this.correctAnswer) {
+          // Respuesta correcta
+          resultMessage.innerHTML = `
+            <div class="result-message result-success">
+              🎉 ¡Excelente! Has demostrado que comprendes el concepto de direcciones IP.
+              <br><small>Con máscara /24, los primeros 24 bits (192.168.10) representan la red.</small>
+            </div>
+          `;
+
+          // Marcar opción correcta
+          document.querySelector(`[data-answer="${this.correctAnswer}"]`).classList.add('correct');
+
+          setTimeout(() => {
+            this.unlockContent();
+          }, 2000);
+
+        } else {
+          // Respuesta incorrecta
+          document.querySelector(`[data-answer="${this.selectedAnswer}"]`).classList.add('incorrect');
+          
+          if (this.attempts >= this.maxAttempts) {
+            resultMessage.innerHTML = `
+              <div class="result-message result-error">
+                ❌ Has agotado tus intentos. Serás redirigido para repasar el tema.
+                <br><small>La respuesta correcta era <strong>192.168.10.0</strong> - necesitas estudiar más sobre direcciones IP.</small>
+              </div>
+            `;
+            
+            document.querySelector(`[data-answer="${this.correctAnswer}"]`).classList.add('correct');
+            
+            // Mostrar countdown y redireccionar
+            let countdown = 5;
+            const countdownInterval = setInterval(() => {
+              resultMessage.innerHTML = `
+                <div class="result-message result-error">
+                  ❌ Intentos agotados. Redirigiendo a la página de estudio en <strong>${countdown}</strong> segundos...
+                  <br><small>Debes repasar el tema de direcciones IP antes de continuar.</small>
+                </div>
+              `;
+              countdown--;
+              
+              if (countdown < 0) {
+                clearInterval(countdownInterval);
+                // Redireccionar a página de estudio (cambia la URL según necesites)
+                window.location.href = 'definicion.html';
+              }
+            }, 1000);
+          } else {
+            const remaining = this.maxAttempts - this.attempts;
+            resultMessage.innerHTML = `
+              <div class="result-message result-error">
+                ❌ Respuesta incorrecta. Te quedan ${remaining} intento${remaining > 1 ? 's' : ''}.
+                <br><small>Recuerda: con /24, los primeros 24 bits representan la parte de red.</small>
+              </div>
+            `;
+            
+            submitBtn.style.display = 'none';
+            retryBtn.style.display = 'inline-block';
+          }
+        }
+
+        submitBtn.disabled = true;
+        this.updateProgress();
+      }
+
+      resetQuiz() {
+        // Limpiar selecciones y estilos
+        document.querySelectorAll('.quiz-option').forEach(opt => {
+          opt.classList.remove('selected', 'incorrect', 'correct');
+        });
+
+        // Resetear estado
+        this.selectedAnswer = null;
+        document.getElementById('resultMessage').innerHTML = '';
+        document.getElementById('submitQuiz').disabled = true;
+        document.getElementById('submitQuiz').style.display = 'inline-block';
+        document.getElementById('retryQuiz').style.display = 'none';
+        
+        this.updateProgress();
+      }
+
+      updateProgress() {
+        const progress = (this.attempts / this.maxAttempts) * 100;
+        document.getElementById('progressFill').style.width = `${Math.min(progress, 100)}%`;
+      }
+
+      unlockContent() {
+        // Ocultar modal con animación
+        const modal = document.getElementById('quizModal');
+        modal.style.animation = 'fadeOut 0.5s ease';
+        
+        setTimeout(() => {
+          modal.style.display = 'none';
+          
+          // Desbloquear contenido
+          const dashboard = document.getElementById('dashboardPage');
+          dashboard.classList.remove('content-locked');
+          dashboard.style.filter = 'none';
+          dashboard.style.pointerEvents = 'all';
+          dashboard.style.userSelect = 'auto';
+
+          // Mostrar mensaje de bienvenida
+          this.showWelcomeMessage();
+        }, 500);
+      }
+
+      showWelcomeMessage() {
+        // Crear toast de bienvenida
+        const toast = document.createElement('div');
+        toast.style.cssText = `
+          position: fixed;
+          top: 20px;
+          right: 20px;
+          background: linear-gradient(45deg, #4ade80, #22c55e);
+          color: white;
+          padding: 20px 25px;
+          border-radius: 12px;
+          box-shadow: 0 10px 25px rgba(34, 197, 94, 0.3);
+          z-index: 1000;
+          animation: slideInRight 0.5s ease;
+          max-width: 300px;
+        `;
+        
+        toast.innerHTML = `
+          <div style="font-weight: bold; margin-bottom: 5px;">🎉 ¡Acceso Concedido!</div>
+          <div style="font-size: 0.9em; opacity: 0.9;">Ahora puedes explorar el Visualizador de Red</div>
+        `;
+
+        document.body.appendChild(toast);
+
+        setTimeout(() => {
+          toast.style.animation = 'slideOutRight 0.5s ease';
+          setTimeout(() => toast.remove(), 500);
+        }, 4000);
+      }
+    }
+
+    // CSS para animaciones adicionales
+    const additionalStyles = document.createElement('style');
+    additionalStyles.textContent = `
+      @keyframes fadeOut {
+        from { opacity: 1; }
+        to { opacity: 0; }
+      }
+      
+      @keyframes slideInRight {
+        from { 
+          opacity: 0;
+          transform: translateX(100%);
+        }
+        to { 
+          opacity: 1;
+          transform: translateX(0);
+        }
+      }
+      
+      @keyframes slideOutRight {
+        from { 
+          opacity: 1;
+          transform: translateX(0);
+        }
+        to { 
+          opacity: 0;
+          transform: translateX(100%);
+        }
+      }
+    `;
+    document.head.appendChild(additionalStyles);
+
+    // Inicializar el quiz cuando cargue la página
+    document.addEventListener('DOMContentLoaded', () => {
+      new QuizAccess();
+    });
+  </script>
     <script src="../assets/js/background.js" defer></script>
     <script src="../assets/js/effects.js" defer></script>
     <script src="../assets/js/nav.js" defer></script>
@@ -426,5 +693,4 @@
 
     <script src="../assets/js/validacion.js" defer></script>
 </body>
->>>>>>> c2fad5c5d783516fc7871b0e960ac467167906d6
 </html>

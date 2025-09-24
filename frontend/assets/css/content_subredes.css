@@ -1,285 +1,550 @@
 /* ===========================
-   SUBREDES (página específica)
-   Depende de theme.css (variables) pero trae fallbacks.
+   SUBREDES MEJORADO - Solo estilos CSS
    =========================== */
 
-/* Helpers si tu systema no los tiene */
+/* Variables mejoradas */
+:root {
+  --primary-glow: rgba(0, 224, 255, 0.4);
+  --secondary-glow: rgba(123, 97, 255, 0.3);
+  --success-glow: rgba(31, 170, 89, 0.3);
+  --warning-glow: rgba(243, 156, 18, 0.3);
+  --card-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+  --card-hover-shadow: 0 16px 48px rgba(0, 0, 0, 0.4);
+}
+
+/* Helpers mejorados */
 .grid { display: grid; }
-.grid-2cols { grid-template-columns: 2fr 1fr; }
-.gap-lg { gap: clamp(16px, 3vw, 32px); }
+.grid-2cols { 
+  grid-template-columns: 2fr 1fr; 
+  gap: 2rem;
+  align-items: start;
+}
+.grid-3cols { 
+  grid-template-columns: repeat(3, 1fr); 
+  gap: 1.5rem;
+}
+.gap-lg { gap: 2rem; }
+.gap-md { gap: 1rem; }
+.gap-sm { gap: 0.75rem; }
+.gap-xs { gap: 0.5rem; }
 .responsive-stack { align-items: start; }
+
 @media (max-width: 900px) {
-  .grid-2cols { grid-template-columns: 1fr; }
+  .grid-2cols, .grid-3cols { 
+    grid-template-columns: 1fr; 
+    gap: 1rem;
+  }
 }
 
-/* Paneles */
+/* Paneles principales mejorados */
 .panel {
-  background: color-mix(in oklab, var(--panel-bg, #0b1220) 70%, transparent);
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
-  border-radius: var(--radius-xl, 16px);
-  border: 1px solid color-mix(in oklab, var(--panel-border, #7aa4), transparent 70%);
-  padding: clamp(16px, 2vw, 24px);
+  background: linear-gradient(145deg, 
+    rgba(15, 23, 42, 0.9) 0%, 
+    rgba(30, 41, 59, 0.8) 50%, 
+    rgba(51, 65, 85, 0.7) 100%);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-radius: 24px;
+  border: 1px solid rgba(148, 163, 184, 0.15);
+  padding: 2rem;
   position: relative;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  overflow: hidden;
 }
+
+.panel::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, 
+    transparent, 
+    rgba(0, 224, 255, 0.5), 
+    transparent);
+}
+
 .panel.elevated {
-  box-shadow: 0 10px 40px rgba(0,0,0,.25), 0 0 0 1px rgba(255,255,255,.03) inset;
-}
-.panel.soft { box-shadow: 0 4px 20px rgba(0,0,0,.18); }
-
-.p-lg { padding: clamp(16px, 2.4vw, 28px); }
-.mt-sm { margin-top: .5rem; }
-.mt-md { margin-top: 1rem; }
-.w-100 { width: 100%; }
-
-.subtitle {
-  font-size: clamp(1rem, 2.2vw, 1.1rem);
-  color: var(--text-strong, #eaf6ff);
-  margin-bottom: .35rem;
-}
-.muted { color: color-mix(in oklab, var(--text-muted, #b8c4d8) 85%, transparent); }
-.text-sm { font-size: .9rem; }
-
-/* Encabezados de sección */
-.section-title {
-  color: var(--accent, #00e0ff);
-  text-shadow: 0 2px 18px color-mix(in oklab, var(--accent, #00e0ff), black 70%);
+  box-shadow: var(--card-shadow);
+  border: 1px solid rgba(0, 224, 255, 0.2);
 }
 
-/* TOASTS */
-.toast-container {
-  position: fixed; top: 20px; right: 20px; z-index: 1000;
-  display: flex; flex-direction: column; gap: 10px;
+.panel.elevated:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--card-hover-shadow);
+  border-color: rgba(0, 224, 255, 0.3);
 }
-.toast {
-  min-width: 280px; padding: 12px 16px; border-radius: 12px; color: #fff;
-  font-weight: 600; box-shadow: 0 6px 18px rgba(0,0,0,.25);
-  transform: translateX(120%); transition: transform .45s cubic-bezier(.68,-.55,.27,1.55);
-  display: flex; align-items: center; gap: 10px;
-  background: linear-gradient(45deg, #2f80ed, #56ccf2);
-}
-.toast.show { transform: translateX(0); }
-.toast.success { background: linear-gradient(45deg, #27ae60, #2ecc71); }
-.toast.error   { background: linear-gradient(45deg, #c0392b, #e74c3c); }
-.toast.warning { background: linear-gradient(45deg, #f39c12, #f1c40f); }
 
-/* LIENZO DE RED */
-#canvas {
-  min-height: clamp(420px, 60vh, 560px);
-  border-radius: var(--radius-xl, 16px);
-  background:
-    radial-gradient(1200px 600px at 30% -10%, rgba(0, 224, 255, .12), transparent 60%),
-    radial-gradient(1000px 600px at 110% 110%, rgba(123, 97, 255, .10), transparent 60%),
-    color-mix(in oklab, var(--surface, #0f172a) 85%, black 10%);
-  border: 2px dashed color-mix(in oklab, var(--accent, #00e0ff), #fff 70%);
+.panel.soft { 
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.25);
+  background: rgba(30, 41, 59, 0.6);
+}
+
+/* Panel educativo mejorado */
+.educational-panel {
+  background: linear-gradient(135deg, 
+    rgba(0, 224, 255, 0.15) 0%, 
+    rgba(123, 97, 255, 0.12) 50%,
+    rgba(31, 170, 89, 0.08) 100%);
+  border: 1px solid rgba(0, 224, 255, 0.3);
+  border-radius: 24px;
+  padding: 2rem;
+  margin-bottom: 2rem;
+  backdrop-filter: blur(20px);
   position: relative;
   overflow: hidden;
 }
+
+.educational-panel::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, 
+    var(--primary), 
+    var(--secondary), 
+    var(--accent));
+}
+
+.educational-panel h2 {
+  color: var(--text-strong, #f8fafc);
+  font-size: 1.75rem;
+  font-weight: 800;
+  margin-bottom: 1rem;
+  text-shadow: 0 0 20px var(--primary-glow);
+}
+
+.educational-panel p {
+  font-size: 1.1rem;
+  line-height: 1.6;
+  color: var(--text, #e2e8f0);
+  opacity: 0.95;
+}
+
+/* Área de red (canvas) completamente rediseñada */
+/* Busca tu regla #canvas y reemplázala o ajústala con esto */
+#canvas {
+  /* --- NUEVAS PROPIEDADES DE GRID --- */
+  display: grid; /* ¡La clave está aquí! */
+  grid-template-columns: repeat(auto-fill, minmax(110px, 1fr)); /* Crea columnas flexibles */
+  gap: 2rem; /* Espacio generoso entre cada dispositivo */
+  padding: 2rem; /* Un margen interno para que no se peguen a los bordes */
+
+  /* --- ESTILOS EXISTENTES (AJUSTADOS) --- */
+  min-height: 500px;
+  border-radius: 20px;
+  background: 
+    radial-gradient(ellipse at top left, rgba(0, 224, 255, 0.08) 0%, transparent 60%),
+    radial-gradient(ellipse at bottom right, rgba(123, 97, 255, 0.06) 0%, transparent 60%),
+    linear-gradient(145deg, 
+      rgba(15, 23, 42, 0.9) 0%, 
+      rgba(30, 41, 59, 0.7) 100%);
+  border: 2px dashed rgba(0, 224, 255, 0.4);
+  position: relative; /* Mantenemos la posición relativa para otros elementos internos */
+  overflow-y: auto; /* Agregamos scroll si hay demasiados elementos */
+  transition: all 0.3s ease;
+}
+
+#canvas::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: 
+    repeating-linear-gradient(45deg,
+      transparent,
+      transparent 20px,
+      rgba(0, 224, 255, 0.02) 20px,
+      rgba(0, 224, 255, 0.02) 40px);
+  pointer-events: none;
+}
+
 #canvas.drag-over {
-  border-color: var(--accent, #00e0ff);
-  outline: 2px solid color-mix(in oklab, var(--accent, #00e0ff), #fff 30%);
-  outline-offset: 2px;
-  transform: translateZ(0);
+  border-color: var(--primary);
+  box-shadow: 
+    0 0 30px var(--primary-glow),
+    inset 0 0 30px rgba(0, 224, 255, 0.1);
+  transform: scale(1.01);
 }
 
-/* Overlay de info */
-.subnet-info {
-  position: absolute; left: 16px; right: 16px; bottom: 16px;
-  background: linear-gradient(180deg, rgba(0,0,0,.55), rgba(0,0,0,.35));
-  color: #e7f6ff; padding: 12px 14px; border-radius: 12px; font-size: .95rem;
-  border: 1px solid rgba(255,255,255,.06);
-  box-shadow: 0 6px 24px rgba(0,0,0,.25);
+/* Información de subred mejorada */
+.subnet-info, .subnet-info-enhanced {
+  position: absolute;
+  left: 20px;
+  right: 20px;
+  bottom: 20px;
+  background: linear-gradient(135deg,
+    rgba(0, 0, 0, 0.8) 0%,
+    rgba(15, 23, 42, 0.9) 100%);
+  border: 1px solid rgba(0, 224, 255, 0.3);
+  border-radius: 16px;
+  padding: 1rem 1.25rem;
+  backdrop-filter: blur(15px);
+  color: var(--text-strong);
+  font-size: 0.95rem;
+  font-weight: 500;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
 }
 
-/* CHIPs de paleta */
-.chip {
-  border: 1px solid rgba(255,255,255,.08);
-  border-radius: 999px;
-  padding: 10px 14px;
-  background: rgba(255,255,255,.06);
-  color: #eaf6ff;
+/* Dispositivos de red mejorados */
+.network-device {
+  position: absolute;
+  width: 100px;
+  height: 70px;
+  border-radius: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   font-weight: 700;
-  letter-spacing: .3px;
+  color: #fff;
+  text-align: center;
+  font-size: 11px;
+  cursor: move;
+  user-select: none;
+  border: 2px solid rgba(255, 255, 255, 0.15);
+  box-shadow: 
+    0 8px 25px rgba(0, 0, 0, 0.3),
+    0 2px 8px rgba(0, 0, 0, 0.2),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  backdrop-filter: blur(10px);
+}
+
+.network-device:hover {
+  transform: scale(1.08) translateY(-4px);
+  box-shadow: 
+    0 16px 40px rgba(0, 0, 0, 0.4),
+    0 4px 12px rgba(0, 0, 0, 0.3);
+  z-index: 10;
+}
+
+.network-device.selected {
+  outline: 3px solid var(--primary);
+  box-shadow: 
+    0 0 0 6px var(--primary-glow),
+    0 16px 40px rgba(0, 0, 0, 0.5);
+  animation: pulse-device 2s infinite;
+}
+
+@keyframes pulse-device {
+  0%, 100% { 
+    box-shadow: 
+      0 0 0 6px var(--primary-glow),
+      0 16px 40px rgba(0, 0, 0, 0.5);
+  }
+  50% { 
+    box-shadow: 
+      0 0 0 12px rgba(0, 224, 255, 0.2),
+      0 20px 50px rgba(0, 0, 0, 0.6);
+  }
+}
+
+/* Tipos de dispositivos con mejores gradientes */
+.network-device.host {
+  background: linear-gradient(135deg, #1faa59 0%, #2ecc71 50%, #27ae60 100%);
+  border-color: rgba(31, 170, 89, 0.5);
+}
+
+.network-device.router {
+  background: linear-gradient(135deg, #3498db 0%, #2980b9 50%, #1abc9c 100%);
+  border-color: rgba(52, 152, 219, 0.5);
+}
+
+.network-device.switch {
+  background: linear-gradient(135deg, #f39c12 0%, #e67e22 50%, #d35400 100%);
+  border-color: rgba(243, 156, 18, 0.5);
+}
+
+/* Chips de paleta completamente rediseñados */
+.chip {
+  border: 2px solid transparent;
+  border-radius: 16px;
+  padding: 14px 20px;
+  background: rgba(255, 255, 255, 0.08);
+  color: var(--text-strong);
+  font-weight: 700;
+  font-size: 0.9rem;
+  letter-spacing: 0.5px;
   cursor: grab;
   user-select: none;
-  transition: transform .15s ease, box-shadow .2s ease, background .2s ease;
-}
-.chip:active { cursor: grabbing; }
-.chip:hover  { transform: translateY(-2px); box-shadow: 0 8px 20px rgba(0,0,0,.25); }
-
-.chip-success { background: linear-gradient(45deg, #1b8f4d, #2bb673); color: #fff; }
-.chip-info    { background: linear-gradient(45deg, #1768e5, #2aa7ff); color: #fff; }
-.chip-warning { background: linear-gradient(45deg, #d98324, #ffb84d); color: #1a1a1a; }
-
-/* Dispositivos en el lienzo */
-.network-device {
-  position: absolute; width: 88px; height: 64px;
-  border-radius: 12px; display: flex; align-items: center; justify-content: center;
-  font-weight: 800; color: #fff; text-align: center; font-size: 12px;
-  cursor: move; user-select: none;
-  border: 1px solid rgba(255,255,255,.08);
-  box-shadow: 0 12px 24px rgba(0,0,0,.35), 0 0 0 1px rgba(255,255,255,.04) inset;
-  transition: transform .18s ease, box-shadow .2s ease, outline-color .2s ease;
-}
-.network-device:hover { transform: scale(1.06); z-index: 10; }
-.network-device.selected {
-  outline: 3px solid var(--accent, #00e0ff);
-  box-shadow: 0 0 0 4px rgba(0,224,255,.18), 0 14px 28px rgba(0,0,0,.45);
-  animation: pulse 1.6s infinite;
-}
-@keyframes pulse {
-  0%   { box-shadow: 0 0 0 4px rgba(0,224,255,.18), 0 14px 28px rgba(0,0,0,.45); }
-  50%  { box-shadow: 0 0 0 8px rgba(0,224,255,.28), 0 18px 36px rgba(0,0,0,.55); }
-  100% { box-shadow: 0 0 0 4px rgba(0,224,255,.18), 0 14px 28px rgba(0,0,0,.45); }
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  overflow: hidden;
+  backdrop-filter: blur(10px);
 }
 
-/* Colores por tipo */
-.network-device.host   { background: linear-gradient(45deg, #1faa59, #31d27d); }
-.network-device.router { background: linear-gradient(45deg, #1d72f3, #4aa3ff); }
-.network-device.switch { background: linear-gradient(45deg, #e68619, #ffb34d); }
-
-/* Botones – solo por si tus .btn no tienen variantes usadas aquí */
-.btn { border-radius: 12px; font-weight: 800; letter-spacing: .2px; }
-.btn-primary  { background: linear-gradient(45deg,#1768e5,#2aa7ff); color:#fff; border: none; }
-.btn-secondary{ background: linear-gradient(45deg,#334155,#64748b); color:#fff; border: none; }
-.btn-warning  { background: linear-gradient(45deg,#d98324,#ffb84d); color:#1a1a1a; border: none; }
-
-/* Ajustes responsivos */
-@media (max-width: 900px) {
-  #canvas { min-height: 360px; }
+.chip::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg,
+    transparent,
+    rgba(255, 255, 255, 0.1),
+    transparent);
+  transition: left 0.5s ease;
 }
 
-/*
-* Estilos específicos para la infografía de Subneteo.
-* Mantiene el look & feel del sistema y añade estilos específicos.
-*/
-
-/* Tabla de potencias de 2 y binario */
-.binary-table {
-    margin-top: 1.5rem;
-    overflow-x: auto; /* Permite el scroll horizontal en móviles */
+.chip:hover::before {
+  left: 100%;
 }
 
-.binary-table table {
-    width: 100%;
-    border-collapse: collapse;
-    background: rgba(0, 212, 255, 0.05);
-    border: 1px solid rgba(0, 212, 255, 0.2);
-    border-radius: 12px;
-    backdrop-filter: blur(10px);
+.chip:active { 
+  cursor: grabbing; 
+  transform: scale(0.95);
 }
 
-.binary-table th, .binary-table td {
-    border: 1px solid rgba(0, 212, 255, 0.25);
-    padding: 1rem;
-    text-align: center;
-    color: var(--text);
+.chip:hover {
+  transform: translateY(-2px) scale(1.02);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.3);
 }
 
-.binary-table th {
-    background: linear-gradient(90deg, #00d4ff, #67e8f9);
-    color: #1a1a2e;
-    font-weight: 700;
+.chip-success {
+  background: linear-gradient(135deg, #1faa59, #2ecc71);
+  border-color: rgba(31, 170, 89, 0.3);
+  box-shadow: 0 4px 15px var(--success-glow);
 }
 
-.binary-table tr:first-child th:first-child {
-    border-top-left-radius: 12px;
+.chip-info {
+  background: linear-gradient(135deg, #3498db, #2980b9);
+  border-color: rgba(52, 152, 219, 0.3);
+  box-shadow: 0 4px 15px rgba(52, 152, 219, 0.3);
 }
 
-.binary-table tr:first-child th:last-child {
-    border-top-right-radius: 12px;
+.chip-warning {
+  background: linear-gradient(135deg, #f39c12, #e67e22);
+  color: #1a1a1a;
+  border-color: rgba(243, 156, 18, 0.3);
+  box-shadow: 0 4px 15px var(--warning-glow);
 }
 
-.binary-table tbody tr:hover {
-    background: rgba(0, 212, 255, 0.1);
+/* Botones mejorados */
+.btn {
+  border-radius: 14px;
+  font-weight: 700;
+  letter-spacing: 0.3px;
+  padding: 12px 24px;
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  overflow: hidden;
+  backdrop-filter: blur(10px);
 }
 
-/* Clases específicas para resaltado binario en la tabla */
-.highlight-binary {
-    background: rgba(103, 232, 249, 0.3);
-    color: #c9f4ff;
-    font-weight: bold;
+.btn::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg,
+    transparent,
+    rgba(255, 255, 255, 0.2),
+    transparent);
+  transition: left 0.4s ease;
 }
 
-/* Contenedores de pasos */
-.step-card {
-    background: rgba(255, 255, 255, 0.05);
-    border: 1px solid rgba(0, 212, 255, 0.3);
-    border-radius: 20px;
-    padding: 2rem;
-    margin-bottom: 2rem;
-    display: flex;
-    align-items: flex-start;
-    gap: 1.5rem;
-    transition: all 0.3s ease;
-    position: relative;
-    overflow: hidden;
-    backdrop-filter: blur(15px);
+.btn:hover::before {
+  left: 100%;
 }
 
-.step-card:hover {
-    transform: translateY(-8px);
-    box-shadow: 0 20px 40px rgba(0, 212, 255, 0.2);
-    background: rgba(255, 255, 255, 0.08);
+.btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
 }
 
-.step-number {
-    background: linear-gradient(135deg, #00d4ff 0%, #67e8f9 100%);
-    color: var(--bg-dark);
-    width: 50px;
-    height: 50px;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-weight: 700;
-    font-size: 1.4rem;
-    flex-shrink: 0;
-    box-shadow: 0 8px 16px rgba(0, 212, 255, 0.4);
-    text-shadow: none;
+.btn-primary {
+  background: linear-gradient(135deg, #3498db, #2980b9);
+  color: #fff;
+  box-shadow: 0 4px 15px rgba(52, 152, 219, 0.3);
 }
 
-.step-content {
-    flex: 1;
+.btn-secondary {
+  background: linear-gradient(135deg, #6c757d, #495057);
+  color: #fff;
+  box-shadow: 0 4px 15px rgba(108, 117, 125, 0.3);
 }
 
-.step-title {
-    font-size: 1.4rem;
-    font-weight: 700;
-    color: #00d4ff;
-    margin-bottom: 1rem;
-    text-shadow: 0 0 10px rgba(0, 212, 255, 0.3);
+.btn-warning {
+  background: linear-gradient(135deg, #f39c12, #e67e22);
+  color: #1a1a1a;
+  box-shadow: 0 4px 15px var(--warning-glow);
 }
 
-.step-text {
-    color: var(--text);
-    line-height: 1.7;
-    margin-bottom: 1rem;
+/* Step indicators mejorados */
+.step-indicator {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  background: linear-gradient(135deg, var(--primary), #67e8f9);
+  color: var(--dark);
+  border-radius: 50%;
+  font-size: 13px;
+  font-weight: 800;
+  margin-right: 12px;
+  box-shadow: 0 6px 18px var(--primary-glow);
+  border: 2px solid rgba(255, 255, 255, 0.2);
 }
 
-/* Clases de alerta/resaltado */
-.alert-box {
-    background: rgba(0, 212, 255, 0.08);
-    border-left: 4px solid #00d4ff;
-    padding: 1.5rem;
-    border-radius: 16px;
-    backdrop-filter: blur(10px);
+/* Subtítulos mejorados */
+.subtitle {
+  font-size: 1.1rem;
+  color: var(--text-strong);
+  margin-bottom: 0.75rem;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
 }
 
-.purple-alert {
-    background: rgba(168, 85, 247, 0.1);
-    border-left: 4px solid #a855f7;
+/* Paneles informativos */
+.info-panel {
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(148, 163, 184, 0.15);
+  border-left: 4px solid var(--primary);
+  border-radius: 16px;
+  padding: 1.25rem;
+  backdrop-filter: blur(10px);
+  margin-bottom: 1rem;
 }
 
-/* Responsive design para la infografía */
+.info-panel.success {
+  border-left-color: var(--accent);
+  background: rgba(31, 170, 89, 0.08);
+}
+
+/* Toasts mejorados */
+.toast-container {
+  position: fixed;
+  top: 100px;
+  right: 20px;
+  z-index: 1000;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  max-width: 350px;
+}
+
+.toast {
+  min-width: 300px;
+  padding: 16px 20px;
+  border-radius: 16px;
+  color: #fff;
+  font-weight: 600;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+  transform: translateX(120%);
+  transition: transform 0.5s cubic-bezier(0.68, -0.55, 0.27, 1.55);
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  backdrop-filter: blur(15px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.toast.show {
+  transform: translateX(0);
+}
+
+.toast.success {
+  background: linear-gradient(135deg, #27ae60, #2ecc71);
+  box-shadow: 0 8px 25px var(--success-glow);
+}
+
+.toast.error {
+  background: linear-gradient(135deg, #c0392b, #e74c3c);
+  box-shadow: 0 8px 25px rgba(231, 76, 60, 0.3);
+}
+
+.toast.warning {
+  background: linear-gradient(135deg, #f39c12, #f1c40f);
+  box-shadow: 0 8px 25px var(--warning-glow);
+  color: #1a1a1a;
+}
+
+/* Utilidades */
+.p-lg { padding: 2rem; }
+.mt-lg { margin-top: 2rem; }
+.mb-sm { margin-bottom: 0.5rem; }
+.mb-md { margin-bottom: 1rem; }
+.mb-lg { margin-bottom: 1.5rem; }
+.w-100 { width: 100%; }
+.text-center { text-align: center; }
+.text-sm { font-size: 0.9rem; }
+.muted { 
+  color: var(--text-muted); 
+  opacity: 0.8;
+}
+
+.v-stack { 
+  display: flex; 
+  flex-direction: column; 
+}
+
+/* Responsive improvements */
 @media (max-width: 768px) {
-    .step-card {
-        flex-direction: column;
-        align-items: center;
-        text-align: center;
-    }
-    
-    .step-number {
-        margin-bottom: 1rem;
-    }
+  .educational-panel {
+    padding: 1.5rem;
+    margin-bottom: 1.5rem;
+  }
+  
+  .panel {
+    padding: 1.5rem;
+  }
+  
+  .step-indicator {
+    width: 28px;
+    height: 28px;
+    font-size: 12px;
+    margin-right: 8px;
+  }
+  
+  .toast-container {
+    top: 80px;
+    right: 15px;
+    left: 15px;
+    max-width: none;
+  }
+  
+  .toast {
+    min-width: auto;
+  }
+  
+  #canvas {
+    min-height: 400px;
+  }
+  
+  .network-device {
+    width: 85px;
+    height: 60px;
+    font-size: 10px;
+  }
+  
+  .chip {
+    padding: 12px 16px;
+    font-size: 0.85rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .grid-2cols {
+    gap: 1rem;
+  }
+  
+  .educational-panel h2 {
+    font-size: 1.5rem;
+  }
+  
+  .educational-panel p {
+    font-size: 1rem;
+  }
 }

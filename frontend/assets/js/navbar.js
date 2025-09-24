@@ -27,9 +27,9 @@ document.addEventListener("DOMContentLoaded", () => {
                             Herramientas <span class="caret">▼</span>
                         </button>
                         <div class="dropdown" id="toolsDropdown" hidden>
-                            <a class="dropdown-item" href="pages/division.html">División Visual de Subredes</a>
-                            <a class="dropdown-item" href="pages/calculadora.html">Calculadora Inteligente de Subredes</a>
-                            <a class="dropdown-item" href="pages/validacion.html">Sistema Adaptativo de Validación</a>
+                            <a class="dropdown-item" href="pages/division.html">Visualizador de Red</a>
+                            <a class="dropdown-item" href="pages/calculadora.html">Calculadora de Subredes</a>
+                            <a class="dropdown-item" href="pages/validacion.html">Comprueba tu Nivel</a>
                         </div>
                     </div>
                 </div>
